@@ -1,5 +1,5 @@
 # JavaProj
-A Java project involving use of various design patterns, to create a simple game.
+My first Java project, involving use of various design patterns, to create a simple game.
 In this project I use JavaFX and some design patterns to create a Sokoban clone, with some changes to graphics, music and game rules.
 
 
