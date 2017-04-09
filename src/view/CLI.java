@@ -82,4 +82,10 @@ public class CLI extends View {
 		}).start();	
 		
 	}
+
+	@Override
+	public void displayWinMessage(String winnerName) {
+		// TODO Auto-generated method stub
+		
+	}
 }

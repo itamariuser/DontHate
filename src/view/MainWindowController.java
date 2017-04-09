@@ -287,5 +287,11 @@ public class MainWindowController extends View{
 		this.stepsLabel.setText(msg);
 		
 	}
+
+	@Override
+	public void displayWinMessage(String winnerName) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

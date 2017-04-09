@@ -19,6 +19,8 @@ import model.data.Position2D;
 @SuppressWarnings("serial")
 public class Level2D extends Level implements Serializable {
 	
+	protected ArrayList<GameObject> objReferences;
+	protected HashMap<Position2D, ArrayList<GameObject>> positionObjectLayout;
 	
 	public int getNumberOfGoals() {
 		return numberOfGoals;
@@ -35,8 +37,7 @@ public class Level2D extends Level implements Serializable {
 		this.numOfSteps++;
 	}
 	
-	protected ArrayList<GameObject> objReferences;
-	protected HashMap<Position2D, ArrayList<GameObject>> positionObjectLayout;
+	
 	
 	
 	public Level2D() {

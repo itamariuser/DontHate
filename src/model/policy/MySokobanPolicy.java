@@ -83,7 +83,7 @@ public class MySokobanPolicy implements SokobanPolicy {
 			for (GameObject obj : this.level.getGameObjectArrayOf(moved.getCurrentLocation())) {
 				if(obj instanceof GoalPoint)
 				{
-					this.level.setNumberOfGoals(this.level.getNumberOfGoals()-1);
+					this.level.setNumberOfGoals(this.level.getNumberOfGoals()+1);
 				}
 			}
 			
@@ -91,12 +91,12 @@ public class MySokobanPolicy implements SokobanPolicy {
 			for(GameObject obj: level.getGameObjectArrayOf(stat.getCurrentLocation())){
 				if(obj instanceof GoalPoint)
 				{
-					this.level.setNumberOfGoals(this.level.getNumberOfGoals()+1);
-					if(this.level.getNumberOfGoals()==0)
-					{
-						this.level.setWinCondition(true);
-					}
+					this.level.setNumberOfGoals(this.level.getNumberOfGoals()-1);
 				}
+			}
+			if(this.level.getNumberOfGoals()==0)
+			{
+				this.level.setWinCondition(true);
 			}
 			return false;
 		}
