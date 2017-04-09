@@ -123,15 +123,6 @@ public class Level2D extends Level implements Serializable {
 	public void setLevelNum(int levelNum) {
 		this.levelNum = levelNum;
 	}
-
-	public int getScore() {
-		return score;
-	}
-
-	public void setScore(int score) {
-		this.score = score;
-	}
-
 	public int getTimePassed() {
 		return timePassed;
 	}

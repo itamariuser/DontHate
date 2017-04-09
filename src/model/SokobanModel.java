@@ -30,6 +30,7 @@ import model.policy.MySokobanPolicy;
  */
 public class SokobanModel extends Observable implements Model  {
 	//for level manipulation
+	LinkedList<String> params = new LinkedList<String>();
 	Level2D level;
 	MySokobanPolicy policy;
 	String direction;
@@ -104,6 +105,14 @@ public class SokobanModel extends Observable implements Model  {
 		{
 			System.out.println("Can't move to this direction");
 		}
+		if(this.level.isWinCondition())
+		{
+			params.clear();
+			params.add("win");
+			params.add("win");
+			setChanged();
+			notifyObservers(params);
+		}
 	}
 	
 	@Override
@@ -114,7 +123,7 @@ public class SokobanModel extends Observable implements Model  {
 	@Override
 	public void setLevel(Level level) {
 		this.level = (Level2D) level;
-		LinkedList<String> params = new LinkedList<String>();
+		params.clear();
 		params.add("DoNothing");
 		this.setChanged();
 		this.notifyObservers(params);
@@ -141,8 +150,8 @@ public class SokobanModel extends Observable implements Model  {
 			fileIn.close();
 			throw new Exception("fileNotFound");//file format not supported, prompt to add level loader
 		}
-		LinkedList<String> params = new LinkedList<String>();
-		params.add("updateView");
+		params.clear();
+		params.add("doNothing");
 		this.setChanged();
 		this.notifyObservers(params);
 	}
@@ -166,7 +175,7 @@ public class SokobanModel extends Observable implements Model  {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		LinkedList<String> params = new LinkedList<String>();
+		params.clear();
 		params.add("DoNothing");
 		this.setChanged();
 		this.notifyObservers(params);

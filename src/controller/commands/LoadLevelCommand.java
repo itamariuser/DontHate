@@ -32,7 +32,7 @@ public class LoadLevelCommand extends Command {
 	
 	@Override
 	public void execute() throws Exception{//load level in model reference and set view's level
-		this.modelRef.loadLevel(this.params.get(0));
+		this.modelRef.loadLevel(this.params.getFirst());
 		this.viewRef.setLevel(this.modelRef.getLevel());
 	}
 }

@@ -2,11 +2,15 @@ package commons;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 import model.data.GameObject;
 
@@ -14,15 +18,16 @@ import model.data.GameObject;
  * A data type representing the level, its structure and additional info
  * @author itamar sheffer
  */
+
+@Entity(name="Level")
 @SuppressWarnings("serial")
 public class Level implements Serializable {
 
-	@Column(name = "levelID")
+	@Column(name = "levelName")
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	protected int levelID;
-	@Column(name = "Name")
 	protected String Name;
+	
 	@Column(name = "difficulty")
 	protected int difficulty;
 	@Column(name = "levelNum")
@@ -31,25 +36,24 @@ public class Level implements Serializable {
 	protected int numberOfGoals;
 	@Column(name = "winCondition")
 	protected boolean winCondition;
-	@Column(name = "score")
-	protected int score;
 	@Column(name = "timePassed")
 	protected int timePassed = 0;
 	@Column(name = "numOfSteps")
 	protected int numOfSteps;
 	@Column(name = "numOfTries")
 	protected int numOfTries;
+	
+	@OneToMany
+	@JoinColumn(name="levelID")
+	private List<GameSession> sessionsPlayed = new ArrayList<GameSession>();
 
-	public Level(int levelID, String name, int difficulty, int levelNum, int numberOfGoals, boolean winCondition,
-			int score, int timePassed, int numOfSteps, int numOfTries) {
+	public Level(String name, int difficulty, int levelNum, int numberOfGoals, boolean winCondition, int timePassed, int numOfSteps, int numOfTries) {
 		super();
-		this.levelID = levelID;
-		Name = name;
+		this.Name = name;
 		this.difficulty = difficulty;
 		this.levelNum = levelNum;
 		this.numberOfGoals = numberOfGoals;
 		this.winCondition = winCondition;
-		this.score = score;
 		this.timePassed = timePassed;
 		this.numOfSteps = numOfSteps;
 		this.numOfTries = numOfTries;
@@ -63,13 +67,6 @@ public class Level implements Serializable {
 //				+ salary + "]";
 //	}
 
-	public int getLevelID() {
-		return levelID;
-	}
-
-	public void setLevelID(int levelID) {
-		this.levelID = levelID;
-	}
 
 	public ArrayList<GameObject> getObjReferences() {
 		return objReferences;
@@ -77,14 +74,6 @@ public class Level implements Serializable {
 
 	public void setObjReferences(ArrayList<GameObject> objReferences) {
 		this.objReferences = objReferences;
-	}
-
-	public int getScore() {
-		return score;
-	}
-
-	public void setScore(int score) {
-		this.score = score;
 	}
 
 	public int getTimePassed() {

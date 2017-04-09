@@ -84,7 +84,7 @@ public class CLI extends View {
 	}
 
 	@Override
-	public void displayWinMessage(String winnerName) {
+	public void displayWinMessage() {
 		// TODO Auto-generated method stub
 		
 	}

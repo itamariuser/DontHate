@@ -2,6 +2,7 @@ package view;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URI;
 import java.util.LinkedList;
 
 import javafx.animation.Animation;
@@ -15,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
@@ -32,6 +34,8 @@ public class MainWindowController extends View{
 	String fileLocation;
 	File lastFileChosen;
 	int playSpeed;
+	boolean winCondition=false;
+	Timeline secondPassed=null;
 	
 	Media backgroundMusic = new Media(new File("./resources/audio/backgroundMusic1.mp3").toURI().toString());
 
@@ -114,14 +118,29 @@ public class MainWindowController extends View{
 			this.setChanged();
 			this.notifyObservers(params);
 
-			Timeline secondPassed = new Timeline(new KeyFrame(Duration.seconds(1), ev -> {
+			secondPassed = new Timeline(new KeyFrame(Duration.seconds(1), ev -> {
+				if(this.winCondition)
+				{
+					this.backgroundMusicPlayer.stop();
+					try {
+			        	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("WinMenu.fxml"));
+			        	BorderPane root1 = (BorderPane) fxmlLoader.load();
+			        	fxmlLoader.setController(new WinMenuController(this.timePassed,this.steps));
+			            Stage stage = new Stage();
+			            stage.setTitle("ABC");
+			            stage.setScene(new Scene(root1));  
+			            stage.show();
+			            secondPassed.stop();
+			        }
+			        catch (IOException e) {
+			            e.printStackTrace();
+			        }
+				}
 				if(this.isPaused==false)
 				{
 					this.timePassed++;
 					this.timePassedLabel.textProperty().set(" "+timePassed);
-					if(this.level.isWinCondition())
-					{
-					}
+					
 				}
 		    }));
 			secondPassed.setCycleCount(Animation.INDEFINITE);
@@ -289,9 +308,9 @@ public class MainWindowController extends View{
 	}
 
 	@Override
-	public void displayWinMessage(String winnerName) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void displayWinMessage() {
+		this.isPaused=true;
+		this.winCondition=true;
+    }
 	
 }

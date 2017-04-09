@@ -32,7 +32,7 @@ public abstract class View  extends Observable{
 	public void setLeveldisplayer(LevelDisplayer leveldisplayer) {
 		this.leveldisplayer = leveldisplayer;
 	}
-	public abstract void displayWinMessage(String winnerName);
+	public abstract void displayWinMessage();
 	
 	
 }
