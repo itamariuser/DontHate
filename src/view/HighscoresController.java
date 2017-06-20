@@ -102,6 +102,8 @@ public class HighscoresController  {
 		    };
 		});
 		
+		
+		//********************* FILTER BY SEARCH FIELD****************
 		ObservableList<GameSession> l=FXCollections.observableArrayList();
 		l.addAll(sesh1,sesh2,sesh3);
 		tableView.setItems(l);
@@ -112,7 +114,6 @@ public class HighscoresController  {
 		        openPlayerWindow(newSelection);
 		    };
 		});
-		
 		
 		searchField.textProperty().addListener((observable, oldValue, newValue) -> {
 				data.setPredicate(sesh -> {

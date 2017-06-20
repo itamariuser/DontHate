@@ -99,8 +99,6 @@ public class PlayerDetailsController {
 		tableView.setItems(l);
 		FilteredList<GameSession> data=new FilteredList<>(l);
 		
-		
-		
 		searchField.textProperty().addListener((observable, oldValue, newValue) -> {
 				data.setPredicate(sesh -> {
                 // If filter text is empty, display all persons.
