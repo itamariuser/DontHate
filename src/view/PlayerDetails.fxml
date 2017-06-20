@@ -22,7 +22,7 @@
                   <Insets left="40.0" top="10.0" />
                </HBox.margin>
             </Button>
-            <TextField prefHeight="36.0" prefWidth="179.0" promptText="Search by level">
+            <TextField fx:id="searchField" prefHeight="36.0" prefWidth="179.0" promptText="Search by level">
                <HBox.margin>
                   <Insets left="40.0" top="10.0" />
                </HBox.margin>
