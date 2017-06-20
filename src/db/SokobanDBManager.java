@@ -7,11 +7,10 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import commons.GameSession;
-import commons.GameSessionKey;
-import commons.Level;
-import commons.Player;
+import commons.LevelEntity;
+import commons.PlayerEntity;
 
-public class SokobanDBManager {
+public class SokobanDBManager{
 	private static SokobanDBManager instance = new SokobanDBManager();
 
 	public static SokobanDBManager getInstance() {
@@ -31,7 +30,8 @@ public class SokobanDBManager {
 	}
 	
 	
-	public void addLevel(Level level) {
+	
+	public void addLevelEntity(LevelEntity level)  {
 		Session session = null;
 		Transaction tx = null;
 		
@@ -52,7 +52,7 @@ public class SokobanDBManager {
 		}		
 	}
 	
-	public void addPlayer(Player player) {
+	public void addPlayerEntity(PlayerEntity player) {
 		Session session = null;
 		Transaction tx = null;
 		
@@ -73,43 +73,38 @@ public class SokobanDBManager {
 		}		
 	}
 	
-	public void registerStudentToCourse(String playerName, int levelID) {
+	public void addGameSession(GameSession sesh) {
 		Session session = null;
 		Transaction tx = null;
 		
+		//TODO: if (thisSession.steps+thisSession.time< [check players current session from database]
+		//TODO: then add the BestGameSession
+		
+//		@SuppressWarnings("unchecked") USE THIS WHEN GENERATING HIGHSCORE BOARD
+//		Query<GameSession> query = session.createQuery( "SELECT Sesh FROM BestGameSessions");
+//		List<GameSession> results = query.list();
+//		if(!results.isEmpty())
+//		{
+//			
+//		
+//			for (GameSession bestGameSession : results) {
+//				if(sesh.getKey().equals(bestGameSession.getKey()))
+//				{
+//					if(sesh.getCompletionTime()+sesh.getNumOfSteps()<bestGameSession.getCompletionTime()+bestGameSession.getNumOfSteps()){
+//						tx = session.beginTransaction();
+//						session.save(sesh);
+//						tx.commit();	
+//					}
+//				}
+//			}
+//		}
 		try {
 			session = factory.openSession();
 			tx = session.beginTransaction();
-			GameSession sess = new GameSession(playerName, levelID);
-			session.save(sess);
-			tx.commit();			
-		}
-		catch (HibernateException ex) {
-			if (tx != null)
-				tx.rollback();
-			System.out.println(ex.getMessage());
-		}
-		finally {
-			if (session != null)
-				session.close();
-		}
-	}
+			session.save(sesh);
+			tx.commit();
+			
 	
-	public void updateSession(String playerName, int levelID, int time, int steps) {
-		Session session = null;
-		Transaction tx = null;
-		
-		try {
-			session = factory.openSession();
-			tx = session.beginTransaction();
-			
-			GameSessionKey key = new GameSessionKey(playerName, levelID);
-			GameSession sess = session.get(GameSession.class, key);
-			
-			sess.setNumOfSteps(steps);
-			sess.setTimePassed(time);
-			session.update(sess);
-			tx.commit();			
 		}
 		catch (HibernateException ex) {
 			if (tx != null)

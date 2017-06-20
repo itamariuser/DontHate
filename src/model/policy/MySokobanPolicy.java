@@ -177,7 +177,7 @@ public class MySokobanPolicy implements SokobanPolicy {
 				this.moveObject(nextObj, getNextPos(nextObj, direction));
 			}
 			this.level=this.moveObject(ch, nextPos);
-			this.level.increaseNumOfSteps();
+			this.level.setNumOfSteps(this.level.getNumOfSteps()+1);
 			return true;
 		}
 		return false;

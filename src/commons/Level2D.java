@@ -32,15 +32,11 @@ public class Level2D extends Level implements Serializable {
 	}
 
 	
-	public void increaseNumOfSteps()
-	{
-		this.numOfSteps++;
-	}
-	
 	
 	
 	
 	public Level2D() {
+		super();
 		this.positionObjectLayout = new HashMap<Position2D, ArrayList<GameObject>>();
 		this.objReferences = new ArrayList<GameObject>();
 	}
@@ -100,52 +96,12 @@ public class Level2D extends Level implements Serializable {
 		this.objReferences.add(lmao);
 	}
 	
-	public String getName() {
-		return Name;
-	}
-
-	public void setName(String name) {
-		Name = name;
-	}
 
 	public int getDifficulty() {
 		return difficulty;
 	}
-
-	public void setDifficulty(int difficulty) {
-		this.difficulty = difficulty;
-	}
-
-	public int getLevelNum() {
-		return levelNum;
-	}
-
-	public void setLevelNum(int levelNum) {
-		this.levelNum = levelNum;
-	}
-	public int getTimePassed() {
-		return timePassed;
-	}
-
-	public void setTimePassed(int timePassed) {
-		this.timePassed = timePassed;
-	}
-
-	public int getNumOfSteps() {
-		return numOfSteps;
-	}
-
-	public void setNumOfSteps(int numOfSteps) {
-		this.numOfSteps = numOfSteps;
-	}
-
-	public int getNumOfTries() {
-		return numOfTries;
-	}
-
-	public void setNumOfTries(int numOfTries) {
-		this.numOfTries = numOfTries;
-	}
+	
+	
 
 	public ArrayList<GameObject> getObjReferences() {
 		return objReferences;

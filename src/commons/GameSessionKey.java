@@ -2,65 +2,65 @@ package commons;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @SuppressWarnings("serial")
 @Embeddable
 public class GameSessionKey implements Serializable {
+	@Column(name = "levelName")
+	String levelName;
+	
+	@Column(name = "playerName")
 	String playerName;
-	int levelID;
-	public GameSessionKey(String playerName, int levelID) {
-		super();
-		this.playerName = playerName;
-		this.levelID = levelID;
-	}
-	public GameSessionKey()
-	{
-		
-	}
-
+	
+	
 	@Override 
 	public int hashCode() {
-		int sum = 0;
-		int evenSum = 0;
-		for (char c : playerName.replaceAll("\\D", "").toCharArray()) {
-		     int digit = c - '0';
-		     sum += digit;
-		     if (digit % 2 == 0) {
-		         evenSum += digit;
-		     }
-		 };
-		return 31 * levelID + sum;
+		return 31 * (Integer.parseInt(levelName)+Integer.parseInt(playerName)) ;
 	}
+
 	
+
+	public GameSessionKey(String levelName, String playerName) {
+		super();
+		this.levelName = levelName;
+		this.playerName = playerName;
+	}
+
+
+
+	public String getLevelName() {
+		return levelName;
+	}
+
+
+
+	public void setLevelName(String levelName) {
+		this.levelName = levelName;
+	}
+
+
+
 	public String getPlayerName() {
 		return playerName;
 	}
-
 
 
 	public void setPlayerName(String playerName) {
 		this.playerName = playerName;
 	}
 
-
-
-	public int getLevelID() {
-		return levelID;
-	}
-
-
-
-	public void setLevelID(int levelID) {
-		this.levelID = levelID;
-	}
-
-
-
+	
 	@Override
 	public boolean equals(Object obj) {
-		GameSessionKey key = (GameSessionKey)obj;
-		
-		return this.levelID == key.levelID && this.playerName.equals(playerName);
+		if(obj instanceof GameSessionKey)
+		{
+			return (this.levelName.equals(((GameSessionKey) obj).levelName) && this.playerName.equals(((GameSessionKey) obj).getPlayerName()));
+		}
+		return false;
 	}
+
+	
+	
 }

@@ -1,10 +1,8 @@
 package view;
 	
 import controller.general.SokobanController;
-import controller.server.ClientHandler;
 import controller.server.MyClientHandler;
 import controller.server.ServerController;
-import db.SokobanDBManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -23,6 +21,8 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) {//start the JavaFX window
+		
+		
 		try {
 			primaryStage.setTitle("Sokoban");
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
@@ -61,7 +61,7 @@ public class Main extends Application {
 		
 		model.addObserver(controller);
 		view.addObserver(controller);
-		view.start();	
+		view.start();
 	}
 	
 	public static void main(String[] args) {//receive user input before starting

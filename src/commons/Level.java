@@ -19,7 +19,7 @@ import model.data.GameObject;
  * @author itamar sheffer
  */
 
-@Entity(name="Level")
+@Entity(name = "Level")
 @SuppressWarnings("serial")
 public class Level implements Serializable {
 
@@ -27,27 +27,18 @@ public class Level implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected String Name;
-	
-	@Column(name = "difficulty")
-	protected int difficulty;
-	@Column(name = "levelNum")
-	protected int levelNum;
-	@Column(name = "numberOfGoals")
-	protected int numberOfGoals;
-	@Column(name = "winCondition")
-	protected boolean winCondition;
-	@Column(name = "timePassed")
-	protected int timePassed = 0;
-	@Column(name = "numOfSteps")
-	protected int numOfSteps;
-	@Column(name = "numOfTries")
-	protected int numOfTries;
-	
-	@OneToMany
-	@JoinColumn(name="levelID")
-	private List<GameSession> sessionsPlayed = new ArrayList<GameSession>();
 
-	public Level(String name, int difficulty, int levelNum, int numberOfGoals, boolean winCondition, int timePassed, int numOfSteps, int numOfTries) {
+	protected int difficulty;
+	
+	protected int levelNum;
+	protected int numberOfGoals;
+	protected boolean winCondition;
+	protected int timePassed = 0;
+	protected int numOfSteps;
+	protected int numOfTries;
+
+	public Level(String name, int difficulty, int levelNum, int numberOfGoals, boolean winCondition, int timePassed,
+			int numOfSteps, int numOfTries) {
 		super();
 		this.Name = name;
 		this.difficulty = difficulty;
@@ -61,12 +52,12 @@ public class Level implements Serializable {
 
 	protected ArrayList<GameObject> objReferences;
 
-//	@Override
-//	public String toString() {
-//		return "Level [levelID=" + levelID + ", first_name=" + first_name + ", last_name=" + last_name + ", salary="
-//				+ salary + "]";
-//	}
-
+	// @Override
+	// public String toString() {
+	// return "Level [levelID=" + levelID + ", first_name=" + first_name + ",
+	// last_name=" + last_name + ", salary="
+	// + salary + "]";
+	// }
 
 	public ArrayList<GameObject> getObjReferences() {
 		return objReferences;

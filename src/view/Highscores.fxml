@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="560.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView fx:id="tableView" layoutY="41.0" minHeight="600.0" minWidth="560.0" prefHeight="600.0" prefWidth="560.0">
+        <columns>
+            <TableColumn editable="false" prefWidth="140.0" sortable="false" text="Name" />
+            <TableColumn editable="false" prefWidth="180.0" sortable="false" text="Date" />
+          <TableColumn editable="false" prefWidth="113.0" sortable="false" text="Steps" />
+          <TableColumn editable="false" prefWidth="123.0" sortable="false" text="Time" />
+        </columns>
+      </TableView>
+      <Button layoutX="62.0" layoutY="1.0" mnemonicParsing="false" onAction="#init" prefHeight="38.0" prefWidth="235.0" text="Press to view leaderboard" />
+      <TextField layoutX="322.0" layoutY="6.0" prefHeight="30.0" prefWidth="188.0" promptText="Search by name" />
+   </children>
+</AnchorPane>

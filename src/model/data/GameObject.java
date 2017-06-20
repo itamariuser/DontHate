@@ -2,8 +2,12 @@ package model.data;
 
 import java.io.Serializable;
 
+
+
 @SuppressWarnings("serial")
 public abstract class GameObject implements Serializable{
+	
+	
 	protected Position currentLocation;
 	protected boolean solid;
 	static protected char texture;

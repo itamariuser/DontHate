@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -119,22 +120,29 @@ public class MainWindowController extends View{
 			this.notifyObservers(params);
 
 			secondPassed = new Timeline(new KeyFrame(Duration.seconds(1), ev -> {
+				
 				if(this.winCondition)
 				{
 					this.backgroundMusicPlayer.stop();
-					try {
-			        	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("WinMenu.fxml"));
-			        	BorderPane root1 = (BorderPane) fxmlLoader.load();
-			        	fxmlLoader.setController(new WinMenuController(this.timePassed,this.steps));
-			            Stage stage = new Stage();
-			            stage.setTitle("ABC");
-			            stage.setScene(new Scene(root1));  
-			            stage.show();
-			            secondPassed.stop();
-			        }
-			        catch (IOException e) {
-			            e.printStackTrace();
-			        }
+					this.displayWinMessage();
+					Platform.runLater(()->{
+						try {
+							secondPassed.stop();
+							FXMLLoader loader = new FXMLLoader(getClass().getResource("WinMenu.fxml"));
+							
+				        	loader.setController(new WinMenuController(this.timePassed,this.steps, level.getName()));
+				        	BorderPane root1 = (BorderPane)loader.load();
+				            Stage stage = new Stage();
+				            stage.setTitle("Congratulations!");
+				            stage.setScene(new Scene(root1));  
+				            stage.show();
+				            Stage stage1 = (Stage) stepsLabel.getScene().getWindow();
+				            stage1.close();
+				        }
+				        catch (IOException e) {
+				            e.printStackTrace();
+				        }
+					});
 				}
 				if(this.isPaused==false)
 				{
@@ -303,8 +311,6 @@ public class MainWindowController extends View{
 
 	@Override
 	public void displayMessage(String msg) {
-		this.stepsLabel.setText(msg);
-		
 	}
 
 	@Override
