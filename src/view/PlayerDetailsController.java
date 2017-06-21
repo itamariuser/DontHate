@@ -1,9 +1,11 @@
 package view;
 
+import java.util.ArrayList;
 import java.util.Date;
 
-import commons.GameSession;
-import commons.GameSessionKey;
+import db.GameSession;
+import db.GameSessionKey;
+import db.SokobanDBManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -36,14 +38,14 @@ public class PlayerDetailsController {
 	{
 		//TODO: SEARCH PLAYER BY NAME IN SOKOBANDB AND GET ALL GAME SESSIONS
 		//STUB FOR GAME SESSIONS FROM SQL
-		GameSession sesh1=new GameSession(1, 1,new Date());
+	/*	GameSession sesh1=new GameSession(1, 1,new Date());
 		sesh1.setKey(new GameSessionKey("LEVEL 23", playerName));
 		
 		GameSession sesh2=new GameSession(3, 2,new Date());
 		sesh2.setKey(new GameSessionKey("LEVEL 1", playerName));
 		
 		GameSession sesh3=new GameSession(2, 3,new Date());
-		sesh3.setKey(new GameSessionKey("LEVEL 576", playerName));
+		sesh3.setKey(new GameSessionKey("LEVEL 576", playerName));*/
 		//END OF STUB
 		
 		
@@ -70,7 +72,7 @@ public class PlayerDetailsController {
 			
 			@Override
 			public ObservableValue<String> call(CellDataFeatures<GameSession, String> arg0) {
-				return new SimpleStringProperty(new Integer(arg0.getValue().getNumOfSteps()).toString());
+				return new SimpleStringProperty(new Integer(arg0.getValue().getSteps()).toString());
 			}
 		});
 		
@@ -87,15 +89,17 @@ public class PlayerDetailsController {
 		stepCol.setPrefWidth(113);
 		timeCol.setPrefWidth(123);
 		ObservableList<TableColumn<GameSession, String>>  list=FXCollections.observableArrayList();
-		
 		list.addAll(levelCol,dateCol,stepCol,timeCol);
 		tableView.getColumns().clear();
 		tableView.getColumns().addAll(list);
 		
 		
+		SokobanDBManager dbm=SokobanDBManager.getInstance();
+		ArrayList<GameSession> arr=dbm.getGameSessionsWithPlayerName(playerName);
+		
 		//********************* FILTER BY SEARCH FIELD****************
 		ObservableList<GameSession> l=FXCollections.observableArrayList();
-		l.addAll(sesh1,sesh2,sesh3);
+		l.addAll(arr);
 		tableView.setItems(l);
 		FilteredList<GameSession> data=new FilteredList<>(l);
 		

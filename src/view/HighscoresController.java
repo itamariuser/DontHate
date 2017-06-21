@@ -1,10 +1,12 @@
 package view;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 
-import commons.GameSession;
-import commons.GameSessionKey;
+import db.GameSession;
+import db.GameSessionKey;
+import db.SokobanDBManager;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -39,23 +41,40 @@ public class HighscoresController  {
 	@SuppressWarnings("unchecked")
 	public void init() {
 		//STUB FOR GAME SESSIONS FROM SQL
-		GameSession sesh1=new GameSession(1, 1,new Date());
-		sesh1.setKey(new GameSessionKey(levelName, "AYLMAO"));
 		
-		GameSession sesh2=new GameSession(3, 2,new Date());
-		sesh2.setKey(new GameSessionKey(levelName, "MOSHE"));
+		//get all sessions where sesh.levelName=this.levelName
+		/*Select sesh
+		 *From GameSessions
+		 *Where sesh.levelName = "+this.levelName;
+		 * 
+		 */
 		
-		GameSession sesh3=new GameSession(2, 3,new Date());
-		sesh3.setKey(new GameSessionKey(levelName, "MOSHE"));
 		
+		
+		//STUB
+		
+		GameSession sesh1=new GameSession(new GameSessionKey(levelName, "AYLMAO"),1, 1,new Date());
+//		sesh1.setLevelName(levelName);
+//		sesh1.setPlayerName("AYLMAO");
+		
+		GameSession sesh2=new GameSession(new GameSessionKey(levelName, "MOSHE"),3, 2,new Date());
+//		sesh1.setLevelName(levelName);
+//		sesh1.setPlayerName("MOSHE");
+		
+		GameSession sesh3=new GameSession(new GameSessionKey(levelName, "MOSHE"),2, 3,new Date());
+//		sesh1.setLevelName(levelName);
+//		sesh1.setPlayerName("DODA");
 		//END OF STUB
 		
+		
+		//Configure columns
 		TableColumn<GameSession,String> nameCol=new TableColumn<>("Name");
 		nameCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<GameSession,String>, ObservableValue<String>>() {
 			
 			@Override
 			public ObservableValue<String> call(CellDataFeatures<GameSession, String> arg0) {
 				return new SimpleStringProperty(arg0.getValue().getKey().getPlayerName());
+//				return new SimpleStringProperty(arg0.getValue().getPlayerName());
 			}
 		});
 		
@@ -73,7 +92,7 @@ public class HighscoresController  {
 			
 			@Override
 			public ObservableValue<String> call(CellDataFeatures<GameSession, String> arg0) {
-				return new SimpleStringProperty(new Integer(arg0.getValue().getNumOfSteps()).toString());
+				return new SimpleStringProperty(new Integer(arg0.getValue().getSteps()).toString());
 			}
 		});
 		
@@ -94,8 +113,11 @@ public class HighscoresController  {
 		tableView.getColumns().clear();
 		tableView.getColumns().addAll(list);
 		
-		tableView.getItems().addAll(sesh1,sesh2,sesh3);
+		//Add data
+		SokobanDBManager dbm=SokobanDBManager.getInstance();
+		ArrayList<GameSession> arr=dbm.getGameSessionsWithLevelName(levelName);//TODO
 		
+		//Detect click
 		tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
 		    if (newSelection != null) {
 		        openPlayerWindow(newSelection);
@@ -105,7 +127,8 @@ public class HighscoresController  {
 		
 		//********************* FILTER BY SEARCH FIELD****************
 		ObservableList<GameSession> l=FXCollections.observableArrayList();
-		l.addAll(sesh1,sesh2,sesh3);
+		//l.addAll(sesh1,sesh2,sesh3);
+		l.addAll(arr);
 		tableView.setItems(l);
 		FilteredList<GameSession> data=new FilteredList<>(l);
 		
@@ -125,6 +148,7 @@ public class HighscoresController  {
                 String lowerCaseFilter = newValue.toLowerCase();
 
                 if (sesh.getKey().getPlayerName().toLowerCase().contains(lowerCaseFilter))
+//                if (sesh.getPlayerName().toLowerCase().contains(lowerCaseFilter))
                     return true; // Filter matches first name.
                 return false; // Does not match.
             });
@@ -140,6 +164,7 @@ public class HighscoresController  {
 			try {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("PlayerDetails.fxml"));
 				loader.setController(new PlayerDetailsController( sesh.key.getPlayerName()));
+//				loader.setController(new PlayerDetailsController( sesh.getPlayerName()));
 				Parent root = (Parent) loader.load();
 		        Stage stage = new Stage();
 		        Scene scene = new Scene(root);      

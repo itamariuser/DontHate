@@ -3,8 +3,10 @@ package view;
 import java.io.IOException;
 import java.util.Date;
 
-import commons.GameSession;
-import commons.GameSessionKey;
+import db.GameSession;
+import db.GameSessionKey;
+import db.LevelEntity;
+import db.PlayerEntity;
 import db.SokobanDBManager;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -36,10 +38,13 @@ public class WinMenuController{
 	@FXML
 	TextField playerName;
 	
+	SokobanDBManager dbm;
+	
 	public WinMenuController(Integer timePassed, Integer steps,String levelName) {
 		this.timePassed=timePassed;
 		this.stepsTaken=steps;
 		this.levelName=levelName;
+		dbm= SokobanDBManager.getInstance();
 	}
 	
 	
@@ -55,10 +60,15 @@ public class WinMenuController{
 //		showHighscores();
 		
 		//TODO: ADD GAME SESSION IN SQL (USING SokobanDBmanager)
+		
+		dbm.add(new GameSession(timePassed, stepsTaken, new Date(),levelName,playerName.getText()));
 	}
 	
 	public void showHighscores(){
 		//open highscores window
+		dbm.add(new LevelEntity("EYY",1));
+		dbm.add(new PlayerEntity("player 1",1));
+		
 
 		Platform.runLater(()->{
 			try {

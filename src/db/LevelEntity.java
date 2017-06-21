@@ -1,4 +1,4 @@
-package commons;
+package db;
 
 import java.util.List;
 import java.util.Set;
@@ -19,6 +19,9 @@ public class LevelEntity {
 	@Column(name = "levelName")
 	protected String levelName;
 	
+	@Column(name="difficulty")
+	protected int difficulty;
+	
 	@OneToMany
 	@JoinColumn(name= "levelName")
 	protected List<GameSession> sessions;
@@ -26,10 +29,18 @@ public class LevelEntity {
 	public String getLevelName() {
 		return levelName;
 	}
+	
 
-	public void setLevelName(String levelName) {
+	
+
+	public LevelEntity(String levelName, int difficulty) {
+		super();
 		this.levelName = levelName;
+		this.difficulty = difficulty;
 	}
+
+
+
 
 	public List<GameSession> getSessions() {
 		return sessions;

@@ -22,7 +22,7 @@
                   <Font size="20.0" />
                </font>
             </Button>
-            <TextField fx:id="playerName" layoutX="330.0" layoutY="167.0" />
+            <TextField fx:id="playerName" layoutX="330.0" layoutY="167.0" promptText="Enter your name" />
             <Button fx:id="button1" layoutX="278.0" layoutY="227.0" mnemonicParsing="false" onAction="#registerHighscore" prefHeight="59.0" prefWidth="252.0" text="Register to highscores">
                <font>
                   <Font size="20.0" />
