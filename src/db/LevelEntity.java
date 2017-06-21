@@ -12,8 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "LevelEntities")
+@Entity(name = "LevelEntities")
 public class LevelEntity {
 	@Id
 	@Column(name = "levelName")
@@ -30,7 +29,9 @@ public class LevelEntity {
 		return levelName;
 	}
 	
-
+	public LevelEntity() {
+		// TODO Auto-generated constructor stub
+	}
 	
 
 	public LevelEntity(String levelName, int difficulty) {

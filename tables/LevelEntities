@@ -1,0 +1,22 @@
+USE [SokobanDB]
+GO
+
+/****** Object:  Table [dbo].[LevelEntities]    Script Date: 21/06/2017 19:03:03 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[LevelEntities](
+	[levelName] [nchar](10) NOT NULL,
+	[difficulty] [nchar](10) NOT NULL,
+ CONSTRAINT [PK_LevelEntities] PRIMARY KEY CLUSTERED 
+(
+	[levelName] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+

@@ -1,0 +1,40 @@
+USE [SokobanDB]
+GO
+
+/****** Object:  Table [dbo].[GameSessions]    Script Date: 21/06/2017 19:01:16 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[GameSessions](
+	[levelName] [nchar](10) NOT NULL,
+	[playerName] [nchar](10) NOT NULL,
+	[steps] [int] NOT NULL,
+	[time] [int] NOT NULL,
+	[date] [date] NOT NULL,
+ CONSTRAINT [PK_GameSessions] PRIMARY KEY CLUSTERED 
+(
+	[levelName] ASC,
+	[playerName] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[GameSessions]  WITH CHECK ADD  CONSTRAINT [FK_GameSessions_LevelEntities] FOREIGN KEY([levelName])
+REFERENCES [dbo].[LevelEntities] ([levelName])
+GO
+
+ALTER TABLE [dbo].[GameSessions] CHECK CONSTRAINT [FK_GameSessions_LevelEntities]
+GO
+
+ALTER TABLE [dbo].[GameSessions]  WITH CHECK ADD  CONSTRAINT [FK_GameSessions_PlayerEntities] FOREIGN KEY([playerName])
+REFERENCES [dbo].[PlayerEntities] ([playerName])
+GO
+
+ALTER TABLE [dbo].[GameSessions] CHECK CONSTRAINT [FK_GameSessions_PlayerEntities]
+GO
+
+

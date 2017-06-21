@@ -2,9 +2,9 @@ package view;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import db.GameSession;
-import db.GameSessionKey;
 import db.LevelEntity;
 import db.PlayerEntity;
 import db.SokobanDBManager;
@@ -15,8 +15,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
@@ -40,36 +38,43 @@ public class WinMenuController{
 	
 	SokobanDBManager dbm;
 	
-	public WinMenuController(Integer timePassed, Integer steps,String levelName) {
+	int levelDifficulty;
+	
+	public WinMenuController(Integer timePassed, Integer steps,String levelName,int levelDifficulty) {
 		this.timePassed=timePassed;
 		this.stepsTaken=steps;
 		this.levelName=levelName;
+		this.levelDifficulty=levelDifficulty;
 		dbm= SokobanDBManager.getInstance();
 	}
 	
 	
-	
-	
-	
 	public void registerHighscore(){
-		//register in highscores
-//		GameSessionKey key=new GameSessionKey(this.levelName, playerName.getText());
-//		GameSession session=new GameSession(timePassed, stepsTaken, new Date());
-//		session.setKey(key);
-//		SokobanDBManager.getInstance().addGameSession(session);
-//		showHighscores();
-		
-		//TODO: ADD GAME SESSION IN SQL (USING SokobanDBmanager)
+		List<LevelEntity> levels=dbm.getLevelsWithName(levelName);
+		if(levels.isEmpty())
+		{
+			dbm.add(new LevelEntity(levelName, levelDifficulty));
+		}
+		List<PlayerEntity> players =dbm.getPlayersWithName(playerName.getText());
+		if(players.isEmpty())
+		{
+			dbm.add(new PlayerEntity(playerName.getText(), 1));
+		}
+		else
+		{
+			PlayerEntity player=new PlayerEntity(players.get(0).getPlayerName(), players.get(0).getWinCount()+1);
+			dbm.updatePlayerWinCount(player.getWinCount()+1, player.getWinCount(), playerName.getText());
+		}
 		
 		dbm.add(new GameSession(timePassed, stepsTaken, new Date(),levelName,playerName.getText()));
+		
+		showHighscores();
 	}
 	
+	/**
+	 * open highscores window
+	 */
 	public void showHighscores(){
-		//open highscores window
-		dbm.add(new LevelEntity("EYY",1));
-		dbm.add(new PlayerEntity("player 1",1));
-		
-
 		Platform.runLater(()->{
 			try {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("Highscores.fxml"));

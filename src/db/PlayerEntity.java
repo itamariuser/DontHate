@@ -26,10 +26,37 @@ public class PlayerEntity implements Serializable {
 	protected int winCount;
 	
 	
+	public PlayerEntity() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	public PlayerEntity(String playerName, int winCount) {
 		super();
 		this.playerName = playerName;
+		this.winCount = winCount;
+	}
+
+
+
+	public String getPlayerName() {
+		return playerName;
+	}
+
+
+
+	public void setPlayerName(String playerName) {
+		this.playerName = playerName;
+	}
+
+
+
+	public int getWinCount() {
+		return winCount;
+	}
+
+
+
+	public void setWinCount(int winCount) {
 		this.winCount = winCount;
 	}
 

@@ -32,8 +32,6 @@ public class SokobanDBManager{
 	
 	
 	private SokobanDBManager() {
-		
-		
 	}
 	
 	
@@ -81,6 +79,47 @@ public class SokobanDBManager{
 	}
 	
 	
+	public List<PlayerEntity> getPlayersWithName(String playerName)
+	{
+		Session session = null;
+		ArrayList<PlayerEntity> gameSessions=new ArrayList<PlayerEntity>();
+		try {
+			session = factory.openSession();
+			Query<PlayerEntity> query=session.createQuery("FROM PlayerEntities p WHERE p.playerName = :name", PlayerEntity.class);
+			query.setParameter("name", playerName);
+			gameSessions.addAll(query.list());
+		}
+		catch (HibernateException ex) {
+			System.out.println(ex.getMessage());
+		}
+		finally {
+			if (session != null)
+				session.close();
+		}
+		return gameSessions;
+	}
+	
+	public List<LevelEntity> getLevelsWithName(String levelName)
+	{
+		Session session = null;
+		ArrayList<LevelEntity> levels=new ArrayList<LevelEntity>();
+		try {
+			session = factory.openSession();
+			Query<LevelEntity> query=session.createQuery("FROM LevelEntities l WHERE l.levelName = :name", LevelEntity.class);
+			query.setParameter("name", levelName);
+			levels.addAll(query.list());
+		}
+		catch (HibernateException ex) {
+			System.out.println(ex.getMessage());
+		}
+		finally {
+			if (session != null)
+				session.close();
+		}
+		return levels;
+	}
+	
+	
 	public void add(LevelEntity level)  {
 		Session session = null;
 		Transaction tx = null;
@@ -100,6 +139,33 @@ public class SokobanDBManager{
 			if (session != null)
 				session.close();
 		}		
+	}
+	
+	public void updatePlayerWinCount(int newWinCount,int oldWinCount,String playerName)
+	{
+		//String hqlUpdate = "update Customer c set c.name = :newName where c.name = :oldName";
+		Session session = null;
+		Transaction tx = null;
+		
+		try {
+			session = factory.openSession();
+			tx = session.beginTransaction();
+			String hqlUpdate = "update PlayerEntities set winCount = :newWinCount where winCount = :oldWinCount";
+			Query<PlayerEntity> query=session.createQuery(hqlUpdate);
+			query.setParameter("newWinCount", newWinCount);
+			query.setParameter("oldWinCount", oldWinCount);
+			query.executeUpdate();
+			tx.commit();			
+		}
+		catch (HibernateException ex) {
+			if (tx != null)
+				tx.rollback();
+			System.out.println(ex.getMessage());
+		}
+		finally {
+			if (session != null)
+				session.close();
+		}	
 	}
 	
 	public void add(PlayerEntity player)  {
