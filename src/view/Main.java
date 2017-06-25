@@ -18,6 +18,7 @@ import model.SokobanModel;
 public class Main extends Application {
 	static String arg[];
 	static boolean isServer;
+	static boolean isClient;
 	
 	@Override
 	public void start(Stage primaryStage) {//start the JavaFX window
@@ -67,8 +68,16 @@ public class Main extends Application {
 	public static void main(String[] args) {//receive user input before starting
 		if(args.length > 0)
 		{
-			isServer = true;
-			arg = args;
+			if(args[0].startsWith("10.10.247.156"))
+			{
+				isClient = true;
+				arg = args;
+			}
+			else
+			{
+				isServer = true;
+				arg = args;
+			}
 		}
 		launch(args);
 	}

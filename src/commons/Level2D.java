@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import model.data.BlankSpace;
 import model.data.GameObject;
 import model.data.MainCharacter;
@@ -16,6 +18,7 @@ import model.data.Position2D;
  * @author itamar sheffer
  *
  */
+@XmlRootElement
 @SuppressWarnings("serial")
 public class Level2D extends Level implements Serializable {
 	

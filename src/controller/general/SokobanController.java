@@ -13,6 +13,7 @@ import controller.commands.HelpCommand;
 import controller.commands.LoadLevelCommand;
 import controller.commands.MoveCommand2D;
 import controller.commands.SaveCommand;
+import controller.commands.SolveCommand;
 import controller.commands.WinCommand;
 import model.Model;
 import view.View;
@@ -45,6 +46,7 @@ public class SokobanController extends Controller {
 		commands.put("save", new SaveCommand(this.modelRef));
 		commands.put("donothing", new DoNothingCommand());
 		commands.put("help", new HelpCommand());
+		commands.put("solve", new SolveCommand(this.modelRef, this.viewRef));
 		commands.put("win",new WinCommand(this.viewRef));
 	}
 
