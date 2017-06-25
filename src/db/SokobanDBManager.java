@@ -143,7 +143,6 @@ public class SokobanDBManager{
 	
 	public void updatePlayerWinCount(int newWinCount,int oldWinCount,String playerName)
 	{
-		//String hqlUpdate = "update Customer c set c.name = :newName where c.name = :oldName";
 		Session session = null;
 		Transaction tx = null;
 		
