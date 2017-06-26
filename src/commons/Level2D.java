@@ -34,10 +34,6 @@ public class Level2D extends Level implements Serializable {
 		this.numberOfGoals = numberOfGoals;
 	}
 
-	
-	
-	
-	
 	public Level2D() {
 		super();
 		this.positionObjectLayout = new HashMap<Position2D, ArrayList<GameObject>>();
