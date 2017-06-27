@@ -2,8 +2,9 @@ package view;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URI;
 import java.util.LinkedList;
+import java.util.Observable;
+import java.util.Observer;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -17,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -30,7 +32,7 @@ import javafx.util.Duration;
  * @author itamar sheffer
  *
  */
-public class MainWindowController extends View{
+public class MainWindowController extends View implements Observer{
 	String fileSourcePath="./levels";
 	String fileLocation;
 	File lastFileChosen;
@@ -318,5 +320,41 @@ public class MainWindowController extends View{
 		this.isPaused=true;
 		this.winCondition=true;
     }
+	
+	public void requestSolution()
+	{
+		Platform.runLater(()->{
+			try {
+				secondPassed.stop();
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("RequestMenu.fxml"));
+				RequestMenuController cont=new RequestMenuController();
+				cont.addObserver(this);
+	        	loader.setController(cont);
+	        	AnchorPane root1 = (AnchorPane)loader.load();
+	            Stage stage = new Stage();
+	            stage.setTitle("Enter server details");
+	            stage.setScene(new Scene(root1));  
+	            stage.show();
+	            Stage stage1 = (Stage) stepsLabel.getScene().getWindow();
+	            stage1.close();
+	        }
+	        catch (IOException e) {
+	            e.printStackTrace();
+	        }
+		});
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		if(o instanceof RequestMenuController && arg instanceof LinkedList){
+			LinkedList<String> args=  (LinkedList<String>) arg;
+			LinkedList<Object> params = new LinkedList<Object>();
+			params.add("Solve");
+			params.add(args.get(1));
+			params.add(args.get(2));
+			this.setChanged();
+			this.notifyObservers(params);
+		}
+	}
 	
 }

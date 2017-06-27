@@ -55,7 +55,7 @@ public class SokobanController extends Controller {
 	public void update(Observable o, Object arg) {
 		@SuppressWarnings("unchecked")
 		LinkedList<String> params = (LinkedList<String>) arg;
-		if(params.getFirst()==null)
+		if(params.isEmpty())
 		{
 			return;
 		}

@@ -5,12 +5,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button layoutX="205.0" layoutY="228.0" mnemonicParsing="false" onAction="#sendRequest" prefHeight="48.0" prefWidth="191.0" text="Send solution request" />
-      <TextField layoutX="227.0" layoutY="94.0" />
-      <TextField layoutX="227.0" layoutY="131.0" />
+      <TextField fx:id="ipText" layoutX="227.0" layoutY="94.0" />
+      <TextField fx:id="portText" layoutX="227.0" layoutY="131.0" />
       <Label layoutX="185.0" layoutY="98.0" text="IP :" />
       <Label layoutX="177.0" layoutY="135.0" text="Port :" />
    </children>

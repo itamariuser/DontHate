@@ -3,11 +3,16 @@ package view;
 import java.util.LinkedList;
 import java.util.Observable;
 
-import commons.Level2D;
-import commons.ServerPlan;
-import controller.client.PlanRequester;
+import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
 
 public class RequestMenuController extends Observable{
+	
+	@FXML
+	TextField ipText;
+	
+	@FXML
+	TextField portText;
 	
 	public RequestMenuController() {
 		// TODO Auto-generated constructor stub
@@ -17,8 +22,8 @@ public class RequestMenuController extends Observable{
 	{
 		LinkedList<String> params = new LinkedList<String>();
 		params.add("Solve");
-		params.add("10.10.247.156");
-		params.add("2828");
+		params.add(ipText.getText());
+		params.add(portText.getText());
 		this.setChanged();
 		this.notifyObservers(params);
 	}
