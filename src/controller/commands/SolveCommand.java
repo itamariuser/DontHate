@@ -1,6 +1,6 @@
 package controller.commands;
 
-import commons.ServerPlan;
+
 import controller.client.MyPlanRequester;
 import model.Model;
 import view.View;
@@ -33,8 +33,7 @@ public class SolveCommand extends Command {
 	@Override
 	public void execute()
 	{
-		ServerPlan plan = this.requester.request(this.getModelRef().getLevel(), params.get(0), Integer.parseInt(params.get(1)));
-		System.out.println("HELL YEAH");
+		this.modelRef.setSolution(SolveCommand.this.requester.request(SolveCommand.this.getModelRef().getLevel(), params.get(0), Integer.parseInt(params.get(1))));
+		System.out.println(this.modelRef.getSolution());
 	}
-	
 }

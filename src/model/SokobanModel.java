@@ -11,6 +11,7 @@ import java.util.Observable;
 
 import commons.Level;
 import commons.Level2D;
+import commons.ServerPlan;
 import model.data.LevelLoader;
 import model.data.LevelSaver;
 import model.data.MainCharacter;
@@ -30,18 +31,104 @@ import model.policy.MySokobanPolicy;
  */
 public class SokobanModel extends Observable implements Model  {
 	//for level manipulation
-	LinkedList<String> params = new LinkedList<String>();
-	Level2D level;
-	MySokobanPolicy policy;
-	String direction;
-	MainCharacter ch;
-	ArrayList<String> directionsAvailable;
+	private LinkedList<String> params = new LinkedList<String>();
+	private Level2D level;
+	private MySokobanPolicy policy;
+	private String direction;
+	private MainCharacter ch;
+	private ServerPlan solution;
+	private ArrayList<String> directionsAvailable;
 	
+	public LinkedList<String> getParams() {
+		return params;
+	}
+
+
+	public void setParams(LinkedList<String> params) {
+		this.params = params;
+	}
+
+
+	public MySokobanPolicy getPolicy() {
+		return policy;
+	}
+
+
+	public void setPolicy(MySokobanPolicy policy) {
+		this.policy = policy;
+	}
+
+
+	public String getDirection() {
+		return direction;
+	}
+
+
+	public void setDirection(String direction) {
+		this.direction = direction;
+	}
+
+
+	public MainCharacter getCh() {
+		return ch;
+	}
+
+
+	public void setCh(MainCharacter ch) {
+		this.ch = ch;
+	}
+
+
+	public ServerPlan getSolution() {
+		return solution;
+	}
+
+
+	public void setSolution(ServerPlan solution) {
+		this.solution = solution;
+	}
+
+
+	public ArrayList<String> getDirectionsAvailable() {
+		return directionsAvailable;
+	}
+
+
+	public void setDirectionsAvailable(ArrayList<String> directionsAvailable) {
+		this.directionsAvailable = directionsAvailable;
+	}
+
+
+	public String getFilePath() {
+		return filePath;
+	}
+
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
+
+	public String getFileType() {
+		return fileType;
+	}
+
+
+	public void setFileType(String fileType) {
+		this.fileType = fileType;
+	}
+
+
+	public void setLevel(Level2D level) {
+		this.level = level;
+	}
+
+
 	//for file manipulation
-	String filePath;
-	static HashMap<String, LevelLoader> levelLoaderFactory;
-	static HashMap<String,LevelSaver> levelSaverFactory;
-	String fileType;
+	private String filePath;
+	private static HashMap<String, LevelLoader> levelLoaderFactory;
+	private static HashMap<String,LevelSaver> levelSaverFactory;
+	private String fileType;
 	
 	public void addLoader(String endsWith,LevelLoader l)
 	{
@@ -181,6 +268,9 @@ public class SokobanModel extends Observable implements Model  {
 		this.notifyObservers(params);
 		
 	}
+
+
+
 	
 
 }

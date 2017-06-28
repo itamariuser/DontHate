@@ -1,10 +1,13 @@
 package controller.client;
 
+import java.beans.XMLDecoder;
+import java.beans.XMLEncoder;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.net.UnknownHostException;
+
+import org.hibernate.result.Output;
 
 import commons.Level2D;
 import commons.ServerPlan;
@@ -15,34 +18,39 @@ public class MyPlanRequester implements PlanRequester{
 	{
 		ServerPlan objFromServer = null;
 		Socket theServer = null;
+		ObjectOutputStream output = null;
+		ObjectInputStream input = null;
 		try {
 			theServer=new Socket(ip, port);
-			ObjectInputStream input = new ObjectInputStream(theServer.getInputStream());
-			ObjectOutputStream output = new ObjectOutputStream(theServer.getOutputStream());
+			System.out.println("Connected to the server");
+			output = new ObjectOutputStream(theServer.getOutputStream());
+			input = new ObjectInputStream(theServer.getInputStream());
 			output.writeObject(level);
+			output.flush();
 			objFromServer = (ServerPlan) input.readObject();
-			
-		} catch (UnknownHostException e) {
+			System.out.println(objFromServer);		
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			
-		} finally {
-			try {
-				theServer.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		}
 		
+		finally {
+			if(output != null)
+				try {
+					output.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}		
+			if (input != null) {
+				try {
+					output.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
 		return objFromServer;
 	}
 }
