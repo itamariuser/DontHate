@@ -1,5 +1,6 @@
 package controller.commands;
 import model.Model;
+import model.SokobanModel;
 import view.View;
 
 
@@ -10,10 +11,10 @@ import view.View;
  */
 public class LoadLevelCommand extends Command {
 	
-	Model modelRef;
+	SokobanModel modelRef;
 	View viewRef;
 	
-	public LoadLevelCommand(Model modelRef,View viewRef) throws Exception {
+	public LoadLevelCommand(SokobanModel modelRef,View viewRef) throws Exception {
 		this.modelRef = modelRef;
 		this.viewRef=viewRef;
 	}
@@ -21,11 +22,11 @@ public class LoadLevelCommand extends Command {
 	public LoadLevelCommand() {}
 	
 
-	public Model getModelRef() {
+	public SokobanModel getModelRef() {
 		return modelRef;
 	}
 
-	public void setModelRef(Model modelRef,View viewRef) {
+	public void setModelRef(SokobanModel modelRef,View viewRef) {
 		this.modelRef = modelRef;
 		this.viewRef=viewRef;
 	}
@@ -33,6 +34,7 @@ public class LoadLevelCommand extends Command {
 	@Override
 	public void execute() throws Exception{//load level in model reference and set view's level
 		this.modelRef.loadLevel(this.params.getFirst());
+		this.modelRef.resetCurrentSolution();
 		this.viewRef.setLevel(this.modelRef.getLevel());
 	}
 }

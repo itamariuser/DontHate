@@ -9,7 +9,7 @@ import java.util.Observable;
 
 import controller.commands.Command;
 import controller.general.SokobanController;
-import model.Model;
+import model.SokobanModel;
 import view.View;
 
 
@@ -22,7 +22,7 @@ public class ServerController extends SokobanController {
 	private int port; 
 	private ClientHandler ch; 
 	private volatile boolean stop;
-	public ServerController(Model model, View view, int port,ClientHandler ch) throws Exception
+	public ServerController(SokobanModel model, View view, int port,ClientHandler ch) throws Exception
 	{
 		super(model ,view);
 		this.port=port;

@@ -8,10 +8,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Observable;
+import java.util.Queue;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import commons.Level;
 import commons.Level2D;
 import commons.ServerPlan;
+import javafx.animation.Timeline;
 import model.data.LevelLoader;
 import model.data.LevelSaver;
 import model.data.MainCharacter;
@@ -37,8 +42,28 @@ public class SokobanModel extends Observable implements Model  {
 	private String direction;
 	private MainCharacter ch;
 	private ServerPlan solution;
+	private ServerPlan currentSolution;
 	private ArrayList<String> directionsAvailable;
 	
+	public void resetCurrentSolution()
+	{
+		currentSolution=solution;
+	}
+	
+	
+	
+	public ServerPlan getCurrentSolution() {
+		return currentSolution;
+	}
+
+
+
+	public void setCurrentSolution(ServerPlan currentSolution) {
+		this.currentSolution = currentSolution;
+	}
+
+
+
 	public LinkedList<String> getParams() {
 		return params;
 	}
@@ -154,6 +179,9 @@ public class SokobanModel extends Observable implements Model  {
 		addSaver("obj", new ObjectLevelSaver());
 		addSaver("xml", new XMLLevelSaver());
 		addSaver("txt", new TextLevel2DSaver());
+		
+		this.solution=new ServerPlan(new LinkedList<>());
+		this.currentSolution=new ServerPlan(new LinkedList<>());
 	}
 	
 	public void addSaver(String endsWith,LevelSaver l)
@@ -184,7 +212,7 @@ public class SokobanModel extends Observable implements Model  {
 		}
 		if(doestDirectionExist==false)
 		{
-			throw new Exception("InvalidDirection");
+			throw new Exception("InvalidDirection: "+direction);
 		}
 		
 		//Send the move command to the policy
@@ -201,6 +229,31 @@ public class SokobanModel extends Observable implements Model  {
 			notifyObservers(params);
 		}
 	}
+	
+	@Override
+	public void runSolution(Queue<String> moveQueue) {
+		Queue<String> q= new LinkedList<>();
+		q.addAll(moveQueue);
+		Timer t=new Timer();
+		t.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				String direction=q.peek();
+				try {
+					move(direction);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				params=new LinkedList<>();
+				params.add("display");
+				params.add("graphics2d");
+				setChanged();
+				notifyObservers(params);
+			}
+		}, 500);
+		
+	}
+	
 	
 	@Override
 	public Level2D getLevel() {

@@ -33,6 +33,5 @@ public abstract class View  extends Observable{
 		this.leveldisplayer = leveldisplayer;
 	}
 	public abstract void displayWinMessage();
-	
-	
+	public abstract void solutionReady();
 }

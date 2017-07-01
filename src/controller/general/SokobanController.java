@@ -12,10 +12,14 @@ import controller.commands.DoNothingCommand;
 import controller.commands.HelpCommand;
 import controller.commands.LoadLevelCommand;
 import controller.commands.MoveCommand2D;
+import controller.commands.OneStepCommand;
+import controller.commands.RunSolutionCommand;
 import controller.commands.SaveCommand;
 import controller.commands.SolveCommand;
 import controller.commands.WinCommand;
-import model.Model;
+import model.SokobanModel;
+import view.Graphics2DDisplayer;
+import view.MainWindowController;
 import view.View;
 
 /**
@@ -26,11 +30,8 @@ import view.View;
 public class SokobanController extends Controller {
 	protected Map<String, Command> commands;
 	
-	public SokobanController() {
-		
-	}
 	
-	public SokobanController(Model model, View view) throws Exception {
+	public SokobanController(SokobanModel model, View view) throws Exception {
 		this.modelRef = model;
 		this.viewRef = view;
 		initCommands();
@@ -40,14 +41,16 @@ public class SokobanController extends Controller {
 	protected void initCommands() throws Exception {
 		commands = new HashMap<String, Command>();
 		commands.put("move", new MoveCommand2D(this.modelRef,this.viewRef));//
-		commands.put("load", new LoadLevelCommand(this.modelRef,this.viewRef));
+		commands.put("load", new LoadLevelCommand((SokobanModel) this.modelRef,this.viewRef));
 		commands.put("display", new DisplayCommand(this.modelRef, this.viewRef));
 		commands.put("displayclear", new DisplayClearCommand(this.modelRef, this.viewRef));
 		commands.put("save", new SaveCommand(this.modelRef));
 		commands.put("donothing", new DoNothingCommand());
 		commands.put("help", new HelpCommand());
-		commands.put("solve", new SolveCommand(this.modelRef, this.viewRef));
+		commands.put("solve", new SolveCommand((SokobanModel) this.modelRef, this.viewRef));
 		commands.put("win",new WinCommand(this.viewRef));
+		commands.put("runfullsolution", new RunSolutionCommand(this.modelRef));
+		commands.put("runonestep", new OneStepCommand((SokobanModel) this.modelRef,(MainWindowController)this.viewRef));
 	}
 
 	
@@ -61,6 +64,10 @@ public class SokobanController extends Controller {
 		}
 		String commandKey = params.removeFirst().toLowerCase();
 		System.out.println(commandKey);
+		if(commandKey.equals("runonestep"))
+		{
+			System.out.println();
+		}
 		Command c = commands.get(commandKey);
 		if(commandKey.equals("exit"))
 		{

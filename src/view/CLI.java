@@ -88,4 +88,10 @@ public class CLI extends View {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void solutionReady() {
+		// TODO Auto-generated method stub
+		
+	}
 }

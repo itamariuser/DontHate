@@ -13,8 +13,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import view.Graphics2DDisplayer?>
 <?import view.KeyCodeStorage?>
-
-<KeyCodeStorage fx:id="keyCodes" maxHeight="720.0" maxWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainWindowController"
+<!-- fx:controller="view.MainWindowController" -->
+<KeyCodeStorage fx:id="keyCodes" maxHeight="720.0" maxWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" 
 upKey="w"
 downKey="s"
 rightKey="d"
@@ -23,30 +23,32 @@ specialMoveKey="SPACE"
 restartLevelKey="R"
 >
    <center>
-      <BorderPane onDragDetected="#startLevel" prefHeight="720.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
+      <BorderPane prefHeight="720.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
          <top>
          </top>
          <left>
-            <VBox prefHeight="727.0" prefWidth="190.0" BorderPane.alignment="CENTER">
-               <children>
-                  <ButtonBar buttonMinWidth="20.0">
-                  </ButtonBar>
-                  <Button mnemonicParsing="true" onAction="#startLevel" text="Display level">
+            <VBox prefHeight="727.0" BorderPane.alignment="CENTER">
+               <children> 
+                  <Button mnemonicParsing="true" onAction="#startLevel" text="Display level" prefHeight="50" prefWidth="105"	>
                      <VBox.margin>
-                        <Insets left="50.0" />
+                        <Insets left="50.0" bottom="25"/>
                      </VBox.margin></Button>
-                      <Button mnemonicParsing="true" onAction="#requestSolution" text="Request solution">
+                     <Button mnemonicParsing="true" onAction="#restart" text="Restart level" prefHeight="50" prefWidth="105"	>
                      <VBox.margin>
-                        <Insets left="50.0" />
+                        <Insets left="50.0" bottom="25"/>
                      </VBox.margin></Button>
-                  <HBox prefHeight="100.0" prefWidth="190.0">
-                     <children>
-                        <Button mnemonicParsing="true" onAction="#restart" onMouseClicked="#restart" text="Restart level" />
-                     </children>
+                  <Button mnemonicParsing="true" onAction="#requestSolution" text="Request solution" prefHeight="50">
                      <VBox.margin>
-                        <Insets top="50.0" />
-                     </VBox.margin>
-                  </HBox>
+                        <Insets left="50.0" bottom="25"/>
+                     </VBox.margin></Button>
+                  <Button fx:id="oneStepButton" mnemonicParsing="true" onAction="#showOneStep" text="Solution: one step" prefHeight="50" visible="false">
+                  <VBox.margin>
+                     <Insets left="50.0" bottom="25" top="25"/>
+                  </VBox.margin></Button>
+                  <Button fx:id="fullSolutionButton" mnemonicParsing="true" onAction="#showFullSolution" text="Show full solution" prefHeight="50" visible="false">
+                  <VBox.margin>
+                     <Insets left="50.0" bottom="25"/>
+                  </VBox.margin></Button>
                </children>
             </VBox>
          </left>

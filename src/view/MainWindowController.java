@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -42,6 +43,8 @@ public class MainWindowController extends View implements Observer{
 	
 	Media backgroundMusic = new Media(new File("./resources/audio/backgroundMusic1.mp3").toURI().toString());
 
+	boolean playerCanMove;
+	
 	Integer timePassed;
 	Integer steps;
 	MediaPlayer backgroundMusicPlayer;
@@ -67,6 +70,11 @@ public class MainWindowController extends View implements Observer{
 	Label timePassedLabel;
 	@FXML
 	KeyCodeStorage keyCodes;
+	
+	@FXML
+	Button oneStepButton;
+	@FXML
+	Button fullSolutionButton;
 	
 	public void init() {
 		this.leveldisplayer=displayer;
@@ -194,6 +202,10 @@ public class MainWindowController extends View implements Observer{
 		}
 	}
 
+	public MainWindowController(boolean playerControl) {
+		this.playerCanMove=playerControl;
+	}
+	
 	public void startLevel() throws FileNotFoundException
 	{
 		if(this.backgroundMusicPlayer==null)
@@ -228,7 +240,6 @@ public class MainWindowController extends View implements Observer{
 	{
 		if(this.lastFileChosen != null)
 		{
-			//this.isPaused=true;
 			this.timePassed=0;
 			LinkedList<String> params = new LinkedList<String>();
 			params.add("Load");
@@ -335,8 +346,7 @@ public class MainWindowController extends View implements Observer{
 	            stage.setTitle("Enter server details");
 	            stage.setScene(new Scene(root1));  
 	            stage.show();
-	            Stage stage1 = (Stage) stepsLabel.getScene().getWindow();
-	            stage1.close();
+	            
 	        }
 	        catch (IOException e) {
 	            e.printStackTrace();
@@ -344,10 +354,11 @@ public class MainWindowController extends View implements Observer{
 		});
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void update(Observable o, Object arg) {
 		if(o instanceof RequestMenuController && arg instanceof LinkedList){
-			LinkedList<String> args=  (LinkedList<String>) arg;
+			LinkedList<String> args = (LinkedList<String>) arg;
 			LinkedList<Object> params = new LinkedList<Object>();
 			params.add("Solve");
 			params.add(args.get(1));
@@ -356,5 +367,53 @@ public class MainWindowController extends View implements Observer{
 			this.notifyObservers(params);
 		}
 	}
+	
+	private void prepForSolution()
+	{
+		try {
+			this.restart();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		this.secondPassed.play();
+	}
+	
+	private boolean isFirstStep;
+	public void showFullSolution()
+	{
+		//TODO: Maybe just send alot of commands one after the other
+		prepForSolution();
+		LinkedList<Object> params = new LinkedList<Object>();
+		params.add("runFullSolution");
+		this.setChanged();
+		this.notifyObservers(params);
+	}
+	
+	@Override
+	public void solutionReady() {
+		fullSolutionButton.setVisible(true);
+		oneStepButton.setVisible(true);
+		isFirstStep=true;
+	}
+	
+	
+	public void showOneStep()
+	{
+		if(isFirstStep) 
+		{
+			prepForSolution();
+			isFirstStep=false;
+		}
+		LinkedList<Object> params = new LinkedList<Object>();
+		params.add("runOneStep");
+		this.setChanged();
+		this.notifyObservers(params);
+		params = new LinkedList<Object>();
+		params.add("display");
+		params.add("graphics2d");
+		this.setChanged();
+		this.notifyObservers(params);
+	}
+
 	
 }

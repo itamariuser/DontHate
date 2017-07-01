@@ -19,6 +19,15 @@ public abstract class Controller implements Observer{
 	protected View viewRef;
 	
 	
+	
+	public final View getViewRef() {
+		return viewRef;
+	}
+
+	public final Model getModelRef() {
+		return modelRef;
+	}
+
 	private BlockingQueue<Command> queue;
 	private boolean stop = false;
 	

@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Queue;
+
 import commons.Level;
 import commons.Level2D;
 import commons.ServerPlan;
@@ -18,4 +20,5 @@ public interface Model {
 	public void setSolution(ServerPlan plan);
 	public void loadLevel(String fileName) throws Exception;
 	public void saveLevel(String fileName) throws Exception;
+	public void runSolution(Queue<String> moveQueue);
 }

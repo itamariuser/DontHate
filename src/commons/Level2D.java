@@ -6,7 +6,6 @@ import java.util.HashMap;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import model.data.BlankSpace;
 import model.data.GameObject;
 import model.data.MainCharacter;
 import model.data.Position;
@@ -116,16 +115,5 @@ public class Level2D extends Level implements Serializable {
 
 	public void setPositionObjectLayout(HashMap<Position2D, ArrayList<GameObject>> positionObjectLayout) {
 		this.positionObjectLayout = positionObjectLayout;
-	}
-  public ArrayList<Position2D> getPositionsOfObject(GameObject g)
-	{
-		ArrayList<Position2D> posList=new ArrayList<>();
-		for (Position2D pos : positionObjectLayout.keySet()) {
-			if(positionObjectLayout.get(pos).contains(g))
-			{
-				posList.add(pos);
-			}
-		}
-		return posList;
 	}
 }

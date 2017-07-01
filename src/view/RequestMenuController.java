@@ -5,6 +5,7 @@ import java.util.Observable;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class RequestMenuController extends Observable{
 	
@@ -15,7 +16,6 @@ public class RequestMenuController extends Observable{
 	TextField portText;
 	
 	public RequestMenuController() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	public void sendRequest()
@@ -26,5 +26,7 @@ public class RequestMenuController extends Observable{
 		params.add(portText.getText());
 		this.setChanged();
 		this.notifyObservers(params);
+		Stage stage1 = (Stage) ipText.getScene().getWindow();
+        stage1.close();
 	}
 }

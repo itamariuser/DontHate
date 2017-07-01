@@ -6,6 +6,7 @@ import controller.server.ServerController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.SokobanModel;
@@ -27,6 +28,8 @@ public class Main extends Application {
 		try {
 			primaryStage.setTitle("Sokoban");
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
+			MainWindowController cont=new MainWindowController(true);
+			loader.setController(cont);
 			BorderPane root = (BorderPane)loader.load();
 			MainWindowController mainView = loader.getController();
 			mainView.init();
