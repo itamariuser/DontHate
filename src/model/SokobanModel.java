@@ -232,25 +232,28 @@ public class SokobanModel extends Observable implements Model  {
 	
 	@Override
 	public void runSolution(Queue<String> moveQueue) {
-		Queue<String> q= new LinkedList<>();
-		q.addAll(moveQueue);
-		Timer t=new Timer();
-		t.schedule(new TimerTask() {
-			@Override
-			public void run() {
-				String direction=q.peek();
-				try {
-					move(direction);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				params=new LinkedList<>();
-				params.add("display");
-				params.add("graphics2d");
-				setChanged();
-				notifyObservers(params);
-			}
-		}, 500);
+//		LinkedList<String> q= new LinkedList<>();
+//		q.addAll(moveQueue);
+//		Timer t=new Timer();
+//		t.schedule(new TimerTask() {
+//			@Override
+//			public void run() {
+//				String direction=q.removeFirst().split(" ")[1];
+//				try {
+//					move(direction);
+//					System.out.println(direction);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//				params=new LinkedList<>();
+//				params.add("display");
+//				params.add("graphics2d");
+//				setChanged();
+//				notifyObservers(params);
+//			}
+//		}, 500);
+		
+		
 		
 	}
 	

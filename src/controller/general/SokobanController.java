@@ -49,7 +49,7 @@ public class SokobanController extends Controller {
 		commands.put("help", new HelpCommand());
 		commands.put("solve", new SolveCommand((SokobanModel) this.modelRef, this.viewRef));
 		commands.put("win",new WinCommand(this.viewRef));
-		commands.put("runfullsolution", new RunSolutionCommand(this.modelRef));
+		commands.put("runfullsolution", new RunSolutionCommand(this.modelRef,this.viewRef,this));
 		commands.put("runonestep", new OneStepCommand((SokobanModel) this.modelRef,(MainWindowController)this.viewRef));
 	}
 
