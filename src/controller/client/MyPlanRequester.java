@@ -14,7 +14,7 @@ public class MyPlanRequester implements PlanRequester{
 	@Override
 	public ServerPlan request(Level2D level,String ip, int port)
 	{
-		/*ServerPlan objFromServer = null;
+		ServerPlan objFromServer = null;
 		Socket theServer = null;
 		ObjectOutputStream output = null;
 		ObjectInputStream input = null;
@@ -47,12 +47,6 @@ public class MyPlanRequester implements PlanRequester{
 			}
 		}
 		//TODO: make stub for a simple plan
-		return objFromServer;*/
-		ServerPlan plan=new ServerPlan();
-		LinkedList<ServerCommand> commands=new LinkedList<>();
-		commands.add(new ServerCommand("Move right"));
-		commands.add(new ServerCommand("Move right"));
-		plan.setCommands(commands);
-		return plan;
+		return objFromServer;
 	}
 }

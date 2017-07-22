@@ -65,6 +65,14 @@ public class Level2D extends Level implements Serializable {
 	}
 	
 	
+	public Position2D getPosOf(GameObject obj)
+	{
+		for(Position2D pos : positionObjectLayout.keySet()) {
+			if(positionObjectLayout.get(pos).contains(obj)) return pos;
+		}
+		return null;
+	}
+	
 
 	public MainCharacter getMainCharacter() throws Exception
 	{

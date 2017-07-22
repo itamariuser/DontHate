@@ -25,9 +25,9 @@ public class Position2D extends Position {
 		this.y = p.y;
 	}
 	
-	public double getDistanceFromPosition2D(Position2D p2)
+	public static double getDistanceFromPosition2D(Position2D p1,Position2D p2)
 	{
-		return Math.sqrt(Math.pow(this.x-p2.getX(), 2)+Math.pow(this.y-p2.getY(), 2));
+		return Math.sqrt(Math.pow(p1.x-p2.getX(), 2)+Math.pow(p1.y-p2.getY(), 2));
 	}
 
 	public int getY() {
@@ -46,5 +46,23 @@ public class Position2D extends Position {
 		return arr;
 	}
 	
+	@Override
+	public String toString() {
+		return ("("+x+", "+y+")");
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Position2D)
+		{
+			Position2D posObj=(Position2D) obj;
+			return (x.intValue()==posObj.x.intValue() && y.intValue()==posObj.y.intValue());
+		}
+		return false;
+	}
+	@Override
+	public int hashCode() {
+		return x.hashCode()+y.hashCode();
+	}
 	
 }
