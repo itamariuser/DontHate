@@ -15,7 +15,7 @@ import gameObjects.Wall;
  */
 
 public class GraphicTextures {
-	private HashMap<String, String> dictionary;
+	private HashMap<Class<?>, String> dictionary;
 
 	private static GraphicTextures instance;
 	
@@ -35,19 +35,19 @@ public class GraphicTextures {
 	 *             - If a file was not found.
 	 */
 	private GraphicTextures() throws FileNotFoundException {
-		this.dictionary = new HashMap<String, String>();
-		dictionary.put(new Wall().getClass().toString(), "./resources/Metalblock.png");
-		dictionary.put(new BlankSpace().getClass().toString(), "./resources/Blankspace2.png");
-		dictionary.put(new MainCharacter().getClass().toString(), "./resources/MainCharacter.bmp");
-		dictionary.put(new Crate().getClass().toString(), "./resources/Crate.bmp");
-		dictionary.put(new GoalPoint().getClass().toString(), "./resources/GoalPoint.png");
+		this.dictionary = new HashMap<Class<?>, String>();
+		dictionary.put(new Wall().getClass(), "./resources/Metalblock.png");
+		dictionary.put(new BlankSpace().getClass(), "./resources/Blankspace2.png");
+		dictionary.put(new MainCharacter().getClass(), "./resources/MainCharacter.bmp");
+		dictionary.put(new Crate().getClass(), "./resources/Crate.bmp");
+		dictionary.put(new GoalPoint().getClass(), "./resources/GoalPoint.png");
 	}
 
-	public HashMap<String, String> getDictionary() {
+	public HashMap<Class<?>, String> getDictionary() {
 		return this.dictionary;
 	}
 
-	public void setDictionary(HashMap<String, String> dictionary) {
+	public void setDictionary(HashMap<Class<?>, String> dictionary) {
 		this.dictionary = dictionary;
 	}
 }

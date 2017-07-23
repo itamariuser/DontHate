@@ -139,7 +139,9 @@ public class Graphics2DDisplayer extends Canvas implements LevelDisplayer  {
 				for (Position2D pos : level.getPositionObjectLayout().keySet()) {
 					if(pos.getX() == temp.getX() && pos.getY() == temp.getY())
 					{
-						String filePath = GraphicTextures.getInstace().getDictionary().get(checkMax(level.getPositionObjectLayout().get(pos)));
+						GraphicTextures z= GraphicTextures.getInstace();
+						Class<?> q=checkMax(level.getPositionObjectLayout().get(pos));
+						String filePath = z.getDictionary().get(q);
 						File file = new File(filePath);
 						gc.drawImage(new Image(new FileInputStream(file)), i*w, j * h,w,h);
 					}
