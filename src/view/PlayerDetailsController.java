@@ -1,10 +1,8 @@
 package view;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import db.GameSession;
-import db.GameSessionKey;
 import db.SokobanDBManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -36,19 +34,6 @@ public class PlayerDetailsController {
 	@SuppressWarnings("unchecked")
 	public void init()
 	{
-		//TODO: SEARCH PLAYER BY NAME IN SOKOBANDB AND GET ALL GAME SESSIONS
-		//STUB FOR GAME SESSIONS FROM SQL
-	/*	GameSession sesh1=new GameSession(1, 1,new Date());
-		sesh1.setKey(new GameSessionKey("LEVEL 23", playerName));
-		
-		GameSession sesh2=new GameSession(3, 2,new Date());
-		sesh2.setKey(new GameSessionKey("LEVEL 1", playerName));
-		
-		GameSession sesh3=new GameSession(2, 3,new Date());
-		sesh3.setKey(new GameSessionKey("LEVEL 576", playerName));*/
-		//END OF STUB
-		
-		
 		TableColumn<GameSession,String> levelCol=new TableColumn<>("Level");
 		levelCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<GameSession,String>, ObservableValue<String>>() {
 			

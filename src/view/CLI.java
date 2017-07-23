@@ -2,23 +2,9 @@ package view;
 
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Observable;
-import java.util.Scanner;
-
-import commons.Level;
-import commons.Level2D;
-import controller.commands.Command;
-import controller.commands.DisplayCommand;
-import controller.commands.ExitCommand;
-import controller.commands.LoadLevelCommand;
-import controller.commands.MoveCommand2D;
-import controller.commands.SaveCommand;
 
 
 /**
@@ -85,13 +71,12 @@ public class CLI extends View {
 
 	@Override
 	public void displayWinMessage() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("CONGRATULATIONS!\n You beat this level!");
 	}
+
 
 	@Override
 	public void solutionReady() {
-		// TODO Auto-generated method stub
 		
 	}
 }

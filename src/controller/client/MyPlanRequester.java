@@ -4,10 +4,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.LinkedList;
 
-import commons.Level2D;
-import commons.ServerCommand;
+import common.Level2D;
 import commons.ServerPlan;
 
 public class MyPlanRequester implements PlanRequester{

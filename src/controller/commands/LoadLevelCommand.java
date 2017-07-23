@@ -1,5 +1,4 @@
 package controller.commands;
-import model.Model;
 import model.SokobanModel;
 import view.View;
 

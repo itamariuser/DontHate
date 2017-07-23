@@ -143,6 +143,7 @@ public class SokobanDBManager {
 			session = factory.openSession();
 			tx = session.beginTransaction();
 			String hqlUpdate = "update PlayerEntities set winCount = :newWinCount where playerName = :name";
+			@SuppressWarnings("unchecked")
 			Query<PlayerEntity> query = session.createQuery(hqlUpdate);
 			query.setParameter("name", playerEntity.getPlayerName());
 			query.setParameter("newWinCount", newWinCount);

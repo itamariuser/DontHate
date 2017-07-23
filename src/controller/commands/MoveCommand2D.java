@@ -2,8 +2,8 @@ package controller.commands;
 
 import java.util.ArrayList;
 
+import gameObjects.MainCharacter;
 import model.Model;
-import model.data.MainCharacter;
 import view.View;
 
 /**

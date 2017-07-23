@@ -1,7 +1,6 @@
 package controller.commands;
 
 import java.util.LinkedList;
-import java.util.List;
 
 public abstract class Command {
 	protected LinkedList<String> params;

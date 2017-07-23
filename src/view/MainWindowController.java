@@ -29,9 +29,8 @@ import javafx.util.Duration;
 
 
 /**
- * An implementation of View, which uses JavaFX Windows to receive user input and display levels graphically
+ * An implementation of View, which uses JavaFX Windows to receive user input and display levels graphically.
  * @author itamar sheffer
- *
  */
 public class MainWindowController extends View implements Observer{
 	String fileSourcePath="./levels";

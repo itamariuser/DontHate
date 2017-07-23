@@ -4,22 +4,20 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-import commons.Level2D;
+import common.Level2D;
+import common.Position2D;
+import gameObjects.GameObject;
+import gameObjects.MainCharacter;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import model.data.GameObject;
-import model.data.MainCharacter;
-import model.data.Position2D;
 /**
- * Responsible for displaying level graphically
- * @author itamar sheffer
- *
+ * A class responsible for displaying a 2D level graphically
  */
 public class Graphics2DDisplayer extends Canvas implements LevelDisplayer  {
 	private HashMap<String ,String> fileNameFactory;
@@ -59,15 +57,20 @@ public class Graphics2DDisplayer extends Canvas implements LevelDisplayer  {
 		}
 	}
 	
-	String checkMax(ArrayList<GameObject> z)
+	/**
+	 * Find the class of the object with the highest priority in a list of game objects.
+	 * @param objects - The list of objects.
+	 * @return The class of the game object with the highest priority, or null if no object with priority higher than the minimum.
+	 */
+	Class<?> checkMax(List<GameObject> objects)
 	{
-		int maxPriority=-1;
-		String c=" ";
-		for (GameObject gameObject : z) {
+		int maxPriority=Integer.MIN_VALUE;
+		Class<?> c=null;
+		for (GameObject gameObject : objects) {
 			if(gameObject.getPriority()>=maxPriority)
 			{
 				maxPriority=gameObject.getPriority();
-				c=gameObject.getClass().toString();
+				c=gameObject.getClass();
 			}
 		}
 		return c;
@@ -101,7 +104,7 @@ public class Graphics2DDisplayer extends Canvas implements LevelDisplayer  {
 						if (checkMax(level.getPositionObjectLayout().get(pos)).equals(MainCharacter.class.getName().toString())) {
 						}
 						else {
-							String filePath = new GraphicTextures().getDictionary().get(checkMax(level.getPositionObjectLayout().get(pos)));
+							String filePath =GraphicTextures.getInstace().getDictionary().get(checkMax(level.getPositionObjectLayout().get(pos)));
 							File file = new File(filePath);
 							gc.drawImage(new Image(new FileInputStream(file)), i*w, j * h,w,h);
 						}
@@ -136,7 +139,7 @@ public class Graphics2DDisplayer extends Canvas implements LevelDisplayer  {
 				for (Position2D pos : level.getPositionObjectLayout().keySet()) {
 					if(pos.getX() == temp.getX() && pos.getY() == temp.getY())
 					{
-						String filePath = new GraphicTextures().getDictionary().get(checkMax(level.getPositionObjectLayout().get(pos)));
+						String filePath = GraphicTextures.getInstace().getDictionary().get(checkMax(level.getPositionObjectLayout().get(pos)));
 						File file = new File(filePath);
 						gc.drawImage(new Image(new FileInputStream(file)), i*w, j * h,w,h);
 					}

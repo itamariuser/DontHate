@@ -4,7 +4,7 @@ import java.beans.XMLDecoder;
 import java.io.BufferedInputStream;
 import java.io.InputStream;
 
-import commons.Level;
+import common.Level;
 
 public class XMLLevelLoader implements LevelLoader {
 

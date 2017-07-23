@@ -7,9 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
 
 /**
- * For storing user defined keys
- * @author itamar sheffer
- *
+ * A class for storing user defined keys
  */
 public class KeyCodeStorage extends BorderPane {
 	@FXML

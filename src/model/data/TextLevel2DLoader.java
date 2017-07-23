@@ -6,8 +6,17 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import commons.Level;
-import commons.Level2D;
+import common.Level;
+import common.Level2D;
+import common.Position2D;
+import gameObjects.BlankSpace;
+import gameObjects.Crate;
+import gameObjects.GameObject;
+import gameObjects.GameObjectFactory;
+import gameObjects.GoalPoint;
+import gameObjects.MainCharacter;
+import gameObjects.Wall;
+import gameObjects.Winnable;
 
 public class TextLevel2DLoader implements LevelLoader {
 

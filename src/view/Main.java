@@ -6,7 +6,6 @@ import controller.server.ServerController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.SokobanModel;
@@ -14,7 +13,6 @@ import model.SokobanModel;
 /**
  * Responsible for initializing the MVC pattern and starting the game
  * @author itamar sheffer
- *
  */
 public class Main extends Application {
 	static String arg[];

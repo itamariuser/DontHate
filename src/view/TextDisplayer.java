@@ -5,10 +5,10 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-import commons.Level2D;
-import model.data.GameObject;
-import model.data.Position2D;
-import model.data.Textures;
+import common.Level2D;
+import common.Position2D;
+import gameObjects.GameObject;
+import gameObjects.Textures;
 
 /**
  * Responsible for displaying a level by text
@@ -73,7 +73,6 @@ public class TextDisplayer implements LevelDisplayer {
 
 	@Override
 	public boolean displayLevelClear(Level2D level,OutputStream output) throws FileNotFoundException {
-		displayLevel(level, output);
-		return true;
+		return displayLevel(level, output);
 	}
 }

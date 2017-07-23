@@ -7,19 +7,23 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class RequestMenuController extends Observable{
-	
+/**
+ * A class responsible for controlling the solution request window.
+ * 
+ * @author itama
+ */
+public class RequestMenuController extends Observable {
+
 	@FXML
 	TextField ipText;
-	
+
 	@FXML
 	TextField portText;
-	
+
 	public RequestMenuController() {
 	}
-	
-	public void sendRequest()
-	{
+
+	public void sendRequest() {
 		LinkedList<String> params = new LinkedList<String>();
 		params.add("Solve");
 		params.add(ipText.getText());
@@ -27,6 +31,6 @@ public class RequestMenuController extends Observable{
 		this.setChanged();
 		this.notifyObservers(params);
 		Stage stage1 = (Stage) ipText.getScene().getWindow();
-        stage1.close();
+		stage1.close();
 	}
 }

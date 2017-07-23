@@ -1,11 +1,11 @@
 package controller.commands;
 
 import model.SokobanModel;
-import view.Graphics2DDisplayer;
 import view.MainWindowController;
 
 public class OneStepCommand extends Command {
 	private SokobanModel modelRef;
+	@SuppressWarnings("unused")
 	private MainWindowController viewRef;
 	public OneStepCommand(SokobanModel modelRef,MainWindowController viewRef) {
 		super();

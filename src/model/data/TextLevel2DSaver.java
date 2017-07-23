@@ -3,7 +3,10 @@ package model.data;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
-import commons.Level2D;
+import common.Level2D;
+import common.Position2D;
+import gameObjects.GameObject;
+import gameObjects.Textures;
 
 public class TextLevel2DSaver implements LevelSaver {
 

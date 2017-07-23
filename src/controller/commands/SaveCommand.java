@@ -1,6 +1,6 @@
 package controller.commands;
 
-import commons.Level2D;
+import common.Level2D;
 import model.Model;
 /**
  * command to save a level in a desired format

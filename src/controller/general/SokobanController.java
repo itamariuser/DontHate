@@ -18,7 +18,6 @@ import controller.commands.SaveCommand;
 import controller.commands.SolveCommand;
 import controller.commands.WinCommand;
 import model.SokobanModel;
-import view.Graphics2DDisplayer;
 import view.MainWindowController;
 import view.View;
 

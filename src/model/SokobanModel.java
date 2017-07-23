@@ -9,17 +9,13 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Observable;
 import java.util.Queue;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.LinkedBlockingQueue;
 
-import commons.Level;
-import commons.Level2D;
+import common.Level;
+import common.Level2D;
 import commons.ServerPlan;
-import javafx.animation.Timeline;
+import gameObjects.MainCharacter;
 import model.data.LevelLoader;
 import model.data.LevelSaver;
-import model.data.MainCharacter;
 import model.data.ObjectLevelLoader;
 import model.data.ObjectLevelSaver;
 import model.data.TextLevel2DLoader;
@@ -273,7 +269,7 @@ public class SokobanModel extends Observable implements Model  {
 	}
 	
 
-	@Override
+	
 	public void loadLevel(String filePath) throws Exception {
 		this.filePath=filePath;
 		String tempName=new File(this.filePath).getName();

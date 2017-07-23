@@ -1,6 +1,6 @@
 package controller.client;
 
-import commons.Level2D;
+import common.Level2D;
 import commons.ServerPlan;
 
 public interface PlanRequester {

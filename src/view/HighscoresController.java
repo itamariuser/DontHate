@@ -38,30 +38,19 @@ public class HighscoresController  {
 	
 	@FXML
 	TextField searchField;
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "unused" })
 	public void init() {
 		//STUB FOR GAME SESSIONS FROM SQL
 		
-		//get all sessions where sesh.levelName=this.levelName
-		/*Select sesh
-		 *From GameSessions
-		 *Where sesh.levelName = "+this.levelName;
-		 * 
-		 */
-		
-		
-		
-		//STUB
-		
-		GameSession sesh1=new GameSession(new GameSessionKey(levelName, "AYLMAO"),1, 1,new Date());
+		GameSession sesh1=new GameSession(new GameSessionKey(levelName, "Level 1"),1, 1,new Date());
 //		sesh1.setLevelName(levelName);
 //		sesh1.setPlayerName("AYLMAO");
 		
-		GameSession sesh2=new GameSession(new GameSessionKey(levelName, "MOSHE"),3, 2,new Date());
+		GameSession sesh2=new GameSession(new GameSessionKey(levelName, "Level 3"),1, 2,new Date());
 //		sesh1.setLevelName(levelName);
 //		sesh1.setPlayerName("MOSHE");
 		
-		GameSession sesh3=new GameSession(new GameSessionKey(levelName, "MOSHE"),2, 3,new Date());
+		GameSession sesh3=new GameSession(new GameSessionKey(levelName, "Level 5"),3, 4,new Date());
 //		sesh1.setLevelName(levelName);
 //		sesh1.setPlayerName("DODA");
 		//END OF STUB
@@ -74,7 +63,6 @@ public class HighscoresController  {
 			@Override
 			public ObservableValue<String> call(CellDataFeatures<GameSession, String> arg0) {
 				return new SimpleStringProperty(arg0.getValue().getKey().getPlayerName());
-//				return new SimpleStringProperty(arg0.getValue().getPlayerName());
 			}
 		});
 		
@@ -148,7 +136,6 @@ public class HighscoresController  {
                 String lowerCaseFilter = newValue.toLowerCase();
 
                 if (sesh.getKey().getPlayerName().toLowerCase().contains(lowerCaseFilter))
-//                if (sesh.getPlayerName().toLowerCase().contains(lowerCaseFilter))
                     return true; // Filter matches first name.
                 return false; // Does not match.
             });
@@ -158,13 +145,16 @@ public class HighscoresController  {
 		 tableView.setItems(sortedData);
 	}
 	
+	/**
+	 * Display a window for the current game session and the player.
+	 * @param sesh - The game session.
+	 */
 	private void openPlayerWindow(GameSession sesh)
 	{
 		Platform.runLater(()->{
 			try {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("PlayerDetails.fxml"));
 				loader.setController(new PlayerDetailsController( sesh.key.getPlayerName()));
-//				loader.setController(new PlayerDetailsController( sesh.getPlayerName()));
 				Parent root = (Parent) loader.load();
 		        Stage stage = new Stage();
 		        Scene scene = new Scene(root);      
@@ -181,19 +171,5 @@ public class HighscoresController  {
 	}
 	public HighscoresController(String levelName) {
 		this.levelName=levelName;
-	}
-
-	public void sortSteps()
-	{
-		
-	}
-	public void filterList()
-	{
-		
-	}
-	
-	public void sortTime()
-	{
-		
 	}
 }

@@ -19,7 +19,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-
+/**
+ * A class responsible for controlling the window displayed to the player after beating a level.
+ */
 public class WinMenuController implements Observer {
 
 	Integer timePassed;
@@ -27,7 +29,6 @@ public class WinMenuController implements Observer {
 	String levelName;
 
 	MediaPlayer backgroundMusicPlayer;
-	// play this https://www.youtube.com/watch?v=wDajqW561KM
 	@FXML
 	Button button1;
 
@@ -59,7 +60,7 @@ public class WinMenuController implements Observer {
 			dbm.add(new PlayerEntity(playerName.getText(), 1));
 		} else {
 			PlayerEntity player = new PlayerEntity(players.get(0).getPlayerName(), players.get(0).getWinCount() + 1);
-			dbm.updatePlayerWinCount(player,player.getWinCount() + 1);
+			dbm.updatePlayerWinCount(player, player.getWinCount() + 1);
 		}
 
 		dbm.add(new GameSession(timePassed, stepsTaken, new Date(), levelName, playerName.getText()));
@@ -123,7 +124,7 @@ public class WinMenuController implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		// receive port, ip from requestWindowController
-		
+
 	}
 
 }

@@ -3,7 +3,7 @@ package model.data;
 import java.beans.XMLEncoder;
 import java.io.OutputStream;
 
-import commons.Level2D;
+import common.Level2D;
 
 public class XMLLevelSaver implements LevelSaver {
 
