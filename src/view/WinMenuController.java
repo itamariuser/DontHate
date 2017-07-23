@@ -59,7 +59,7 @@ public class WinMenuController implements Observer {
 			dbm.add(new PlayerEntity(playerName.getText(), 1));
 		} else {
 			PlayerEntity player = new PlayerEntity(players.get(0).getPlayerName(), players.get(0).getWinCount() + 1);
-			dbm.updatePlayerWinCount(player.getWinCount() + 1, player.getWinCount(), playerName.getText());
+			dbm.updatePlayerWinCount(player,player.getWinCount() + 1);
 		}
 
 		dbm.add(new GameSession(timePassed, stepsTaken, new Date(), levelName, playerName.getText()));

@@ -46,7 +46,6 @@ public class MyPlanRequester implements PlanRequester{
 				}
 			}
 		}
-		//TODO: make stub for a simple plan
 		return objFromServer;
 	}
 }

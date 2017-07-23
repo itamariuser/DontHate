@@ -5,6 +5,10 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+/**
+ * The primary key for GameSession.
+ * For work with the ORM.
+ */
 @SuppressWarnings("serial")
 @Embeddable()
 public class GameSessionKey implements Serializable {

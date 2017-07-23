@@ -12,27 +12,29 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * A class representing a level. For work with the ORM.
+ */
 @Entity(name = "LevelEntities")
 public class LevelEntity {
 	@Id
 	@Column(name = "levelName")
 	protected String levelName;
-	
-	@Column(name="difficulty")
+
+	@Column(name = "difficulty")
 	protected int difficulty;
-	
+
 	@OneToMany
-	@JoinColumn(name= "levelName")
+	@JoinColumn(name = "levelName")
 	protected List<GameSession> sessions;
 
 	public String getLevelName() {
 		return levelName;
 	}
-	
+
 	public LevelEntity() {
 		// TODO Auto-generated constructor stub
 	}
-	
 
 	public LevelEntity(String levelName, int difficulty) {
 		super();
@@ -40,16 +42,12 @@ public class LevelEntity {
 		this.difficulty = difficulty;
 	}
 
-
-
-
 	public List<GameSession> getSessions() {
 		return sessions;
 	}
 
 	public void setBSessions(List<GameSession> bestSessions) {
 		this.sessions = bestSessions;
-	}  
-	
-	
+	}
+
 }
