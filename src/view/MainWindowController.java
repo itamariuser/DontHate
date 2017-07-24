@@ -161,8 +161,6 @@ public class MainWindowController extends View implements Observer{
 				}
 		    }));
 			secondPassed.setCycleCount(Animation.INDEFINITE);
-			secondPassed.play();
-
 		}
 		
 	}
@@ -207,6 +205,8 @@ public class MainWindowController extends View implements Observer{
 	
 	public void startLevel() throws FileNotFoundException
 	{
+		
+		secondPassed.play();
 		if(this.backgroundMusicPlayer==null)
 		{
 			this.backgroundMusicPlayer= new MediaPlayer(backgroundMusic);

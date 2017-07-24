@@ -127,7 +127,7 @@ public class PlayerDetailsController {
 		tableView.getColumns().clear();
 		tableView.getColumns().addAll(list);
 		
-		
+		//RESTORE
 //		SokobanDBManager dbm=SokobanDBManager.getInstance();
 //		ArrayList<GameSession> arr=dbm.getGameSessionsWithPlayerName(playerName);
 		

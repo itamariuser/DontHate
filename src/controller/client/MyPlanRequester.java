@@ -23,13 +23,13 @@ public class MyPlanRequester implements PlanRequester{
 			output = new ObjectOutputStream(theServer.getOutputStream());
 			input = new ObjectInputStream(theServer.getInputStream());
 			output.writeObject(level);
-
+//RESTORE
 //			objFromServer = (ServerPlan) input.readObject();
+			//return objFromServer;
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 
-//		
+//		RESTORE
 //		finally {
 //			if(output != null)
 //				try {
@@ -45,6 +45,8 @@ public class MyPlanRequester implements PlanRequester{
 //				}
 //			}
 //		}
+		
+		//DELETE
 		SokobanSolver solver = new SokobanSolver();
 		
 		ServerPlan s=ServerPlanAdapter.convert(solver.solveLevel(level), level.getName());

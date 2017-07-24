@@ -136,12 +136,14 @@ public class HighscoresController  {
 		tableView.getColumns().addAll(list);
 		
 		//Add data
+		
+		//RESTORE
 //		SokobanDBManager dbm=SokobanDBManager.getInstance();
-//		ArrayList<GameSession> arr=dbm.getGameSessionsWithLevelName(levelName);//TODO
+//		ArrayList<GameSession> arr=dbm.getGameSessionsWithLevelName(levelName);
 		
 		//Detect click
 		tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-		    if (newSelection != null) {
+		    if (newSelection != null && newSelection!=oldSelection) {
 		        openPlayerWindow(newSelection);
 		    };
 		});
@@ -149,7 +151,11 @@ public class HighscoresController  {
 		
 		//********************* FILTER BY SEARCH FIELD****************
 		ObservableList<GameSession> l=FXCollections.observableArrayList();
+		
+		//DELETE
 		l.addAll(sesh1,sesh2,sesh3,sesh4);
+		
+		//RESTORE
 //		l.addAll(arr);
 		tableView.setItems(l);
 		FilteredList<GameSession> data=new FilteredList<>(l);
@@ -183,25 +189,30 @@ public class HighscoresController  {
 	 * Display a window for the current game session and the player.
 	 * @param sesh - The game session.
 	 */
+	private static boolean opened=false;
 	private void openPlayerWindow(GameSession sesh)
 	{
-		Platform.runLater(()->{
-			try {
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("PlayerDetails.fxml"));
-				loader.setController(new PlayerDetailsController(sesh));
-				Parent root = (Parent) loader.load();
-		        Stage stage = new Stage();
-		        Scene scene = new Scene(root);      
-		        stage.setTitle("Player Details: "+ sesh.key.getPlayerName());
-		        stage.setScene(scene);
-		        stage.setResizable(false);
-		        stage.show();
-
-	        }
-	        catch (IOException e) {
-	            e.printStackTrace();
-	        }
-		});
+		if(opened==false)
+		{
+			opened=true;
+			Platform.runLater(()->{
+				try {
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("PlayerDetails.fxml"));
+					loader.setController(new PlayerDetailsController(sesh));
+					Parent root = (Parent) loader.load();
+			        Stage stage = new Stage();
+			        Scene scene = new Scene(root);      
+			        stage.setTitle("Player Details: "+ sesh.key.getPlayerName());
+			        stage.setScene(scene);
+			        stage.setResizable(false);
+			        stage.show();
+	
+		        }
+		        catch (IOException e) {
+		            e.printStackTrace();
+		        }
+			});
+		}
 	}
 
 	public HighscoresController(String levelName, int stepsTaken, int timePassed) {
