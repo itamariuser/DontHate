@@ -35,6 +35,7 @@ public class LoadLevelCommand extends Command {
 		this.modelRef.loadLevel(this.params.getFirst());
 		this.modelRef.resetCurrentSolution();
 		this.viewRef.setLevel(this.modelRef.getLevel());
+		this.modelRef.stop();
 	}
 }
 

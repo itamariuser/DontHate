@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Observable;
 import java.util.Queue;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import common.Level;
 import common.Level2D;
@@ -225,16 +227,49 @@ public class SokobanModel extends Observable implements Model  {
 			notifyObservers(params);
 		}
 	}
-	
+	boolean stop;
 	@Override
 	public void runSolution(Queue<String> moveQueue) {
+		ArrayList<String> q= new ArrayList<>();
+		q.addAll(moveQueue);
+		stop=false;
+		Thread t=new Thread(new Runnable() {
+			@Override
+			public void run() {
+				while(!stop)
+				{
+					if(q.isEmpty()) break;
+					String direction=q.iterator().next();
+					q.remove(direction);
+					try {
+						move(direction);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					params=new LinkedList<>();
+					params.add("display");
+					params.add("graphics2d");
+					setChanged();
+					notifyObservers(params);
+					synchronized (this) {
+						try {
+							this.wait(500);
+						} catch (InterruptedException e) {
+							stop=true;
+						}
+					}
+				}
+			}
+		});
+		t.start();
+		
 //		LinkedList<String> q= new LinkedList<>();
 //		q.addAll(moveQueue);
 //		Timer t=new Timer();
 //		t.schedule(new TimerTask() {
 //			@Override
 //			public void run() {
-//				String direction=q.removeFirst().split(" ")[1];
+//				String direction=q.iterator().next();
 //				try {
 //					move(direction);
 //					System.out.println(direction);
@@ -248,8 +283,6 @@ public class SokobanModel extends Observable implements Model  {
 //				notifyObservers(params);
 //			}
 //		}, 500);
-		
-		
 		
 	}
 	
@@ -321,8 +354,10 @@ public class SokobanModel extends Observable implements Model  {
 		
 	}
 
-
-
+	@Override
+	public void stop() {
+		stop=true;
+	}
 	
 
 }

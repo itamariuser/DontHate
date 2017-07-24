@@ -22,17 +22,16 @@ public class SokobanDBManager {
 		if (instance == null) {
 			instance = new SokobanDBManager();
 		}
-
-		try {
-			Configuration configuration = new Configuration();
-			configuration.configure();
-			factory = configuration.buildSessionFactory();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		return instance;
 	}
-
+//		try {
+//			Configuration configuration = new Configuration();
+//			configuration.configure();
+//			factory = configuration.buildSessionFactory();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return instance;
 	private SokobanDBManager() {
 	}
 
@@ -44,20 +43,22 @@ public class SokobanDBManager {
 	public ArrayList<GameSession> getGameSessionsWithLevelName(String levelName) {
 		Session session = null;
 		ArrayList<GameSession> gameSessions = new ArrayList<GameSession>();
-		try {
-			session = factory.openSession();
-			@SuppressWarnings("unchecked")
-			Query<GameSession> query = session.createQuery("FROM GameSessions s WHERE s.key.levelName = :name");
-			query.setParameter("name", levelName);
-			List<GameSession> s = query.list();
-			gameSessions.addAll(s);
-			session.beginTransaction();
-		} catch (HibernateException ex) {
-			System.out.println(ex.getMessage());
-		} finally {
-			if (session != null)
-				session.close();
-		}
+		
+//		GameSession s1=new GameSession(new GameSessionKey("Level 5", "Itamar"), 20, steps, date);
+//		try {
+//			session = factory.openSession();
+//			@SuppressWarnings("unchecked")
+//			Query<GameSession> query = session.createQuery("FROM GameSessions s WHERE s.key.levelName = :name");
+//			query.setParameter("name", levelName);
+//			List<GameSession> s = query.list();
+//			gameSessions.addAll(s);
+//			session.beginTransaction();
+//		} catch (HibernateException ex) {
+//			System.out.println(ex.getMessage());
+//		} finally {
+//			if (session != null)
+//				session.close();
+//		}
 		return gameSessions;
 	}
 

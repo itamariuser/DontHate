@@ -17,6 +17,6 @@
         </columns>
       </TableView>
       <Button layoutX="62.0" layoutY="1.0" mnemonicParsing="false" onAction="#init" prefHeight="38.0" prefWidth="235.0" text="Press to view leaderboard" />
-      <TextField fx:id="searchField" layoutX="322.0" layoutY="6.0" onKeyTyped="#filterList" prefHeight="30.0" prefWidth="188.0" promptText="Search by name" />
+      <TextField fx:id="searchField" layoutX="322.0" layoutY="6.0" prefHeight="30.0" prefWidth="188.0" promptText="Search by name" />
    </children>
 </AnchorPane>

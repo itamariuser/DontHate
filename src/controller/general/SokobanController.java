@@ -62,11 +62,7 @@ public class SokobanController extends Controller {
 			return;
 		}
 		String commandKey = params.removeFirst().toLowerCase();
-		System.out.println(commandKey);
-		if(commandKey.equals("runonestep"))
-		{
-			System.out.println();
-		}
+	
 		Command c = commands.get(commandKey);
 		if(commandKey.equals("exit"))
 		{

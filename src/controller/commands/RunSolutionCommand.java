@@ -66,7 +66,5 @@ public class RunSolutionCommand extends Command {
 				contRef.insertCommand(dispComm);
 			}
 		}, 500);
-		
-		
 	}
 }

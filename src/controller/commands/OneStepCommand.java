@@ -14,9 +14,10 @@ public class OneStepCommand extends Command {
 	}
 	@Override
 	public void execute() throws Exception {
-		String description=modelRef.getCurrentSolution().getCommands().getLast().getDescription();
-		modelRef.move(description.split(" ")[1]);//Get the arguments for the command, e.g: "Move right" -> "right"
-		modelRef.getCurrentSolution().getCommands().removeLast();
+		String direction=modelRef.getCurrentSolution().getCommands().getFirst().getDescription();
+//		modelRef.move(description.split(" ")[1]);//Get the arguments for the command, e.g: "Move right" -> "right"
+		modelRef.getCurrentSolution().getCommands().removeFirst();
+		modelRef.move(direction);
 	}
 	
 }

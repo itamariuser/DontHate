@@ -34,23 +34,57 @@ public class HighscoresController  {
 	
 	@FXML
 	Button s;
+	
 	String levelName;
+	int stepsTaken;
+	int timePassed;
 	
 	@FXML
 	TextField searchField;
+	
+	GameSession sesh1;
+	GameSession sesh2;
+	GameSession sesh3;
+	GameSession sesh4;
+	
 	@SuppressWarnings({ "unchecked", "unused" })
 	public void init() {
 		//STUB FOR GAME SESSIONS FROM SQL
-		
-		GameSession sesh1=new GameSession(new GameSessionKey(levelName, "Level 1"),1, 1,new Date());
+		Date dat1=new Date();
+		dat1.setYear(2017);
+		dat1.setMonth(6);
+		dat1.setDate(15);
+		dat1.setHours(14);
+		dat1.setMinutes(56);
+		dat1.setSeconds(33);
+		sesh1=new GameSession(new GameSessionKey(levelName, "Itamar"),50, 30,dat1);
 //		sesh1.setLevelName(levelName);
 //		sesh1.setPlayerName("AYLMAO");
 		
-		GameSession sesh2=new GameSession(new GameSessionKey(levelName, "Level 3"),1, 2,new Date());
+		Date dat2=new Date();
+		dat2.setYear(2017);
+		dat2.setMonth(6);
+		dat2.setDate(19);
+		dat2.setHours(16);
+		dat2.setMinutes(4);
+		dat2.setSeconds(15);
+		
+		sesh2=new GameSession(new GameSessionKey(levelName, "Matan"),60, 30,dat2);
 //		sesh1.setLevelName(levelName);
 //		sesh1.setPlayerName("MOSHE");
 		
-		GameSession sesh3=new GameSession(new GameSessionKey(levelName, "Level 5"),3, 4,new Date());
+		Date dat3=new Date();
+		dat3.setYear(2017);
+		dat3.setMonth(7);
+		dat3.setDate(21);
+		dat3.setHours(22);
+		dat3.setMinutes(23);
+		dat3.setSeconds(43);
+		sesh3=new GameSession(new GameSessionKey(levelName, "Moshe"),40, 45,dat3);
+		
+		
+		sesh4=new GameSession(new GameSessionKey(levelName, "Itamar"),timePassed, stepsTaken,new Date());
+		
 //		sesh1.setLevelName(levelName);
 //		sesh1.setPlayerName("DODA");
 		//END OF STUB
@@ -102,8 +136,8 @@ public class HighscoresController  {
 		tableView.getColumns().addAll(list);
 		
 		//Add data
-		SokobanDBManager dbm=SokobanDBManager.getInstance();
-		ArrayList<GameSession> arr=dbm.getGameSessionsWithLevelName(levelName);//TODO
+//		SokobanDBManager dbm=SokobanDBManager.getInstance();
+//		ArrayList<GameSession> arr=dbm.getGameSessionsWithLevelName(levelName);//TODO
 		
 		//Detect click
 		tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
@@ -115,8 +149,8 @@ public class HighscoresController  {
 		
 		//********************* FILTER BY SEARCH FIELD****************
 		ObservableList<GameSession> l=FXCollections.observableArrayList();
-		//l.addAll(sesh1,sesh2,sesh3);
-		l.addAll(arr);
+		l.addAll(sesh1,sesh2,sesh3,sesh4);
+//		l.addAll(arr);
 		tableView.setItems(l);
 		FilteredList<GameSession> data=new FilteredList<>(l);
 		
@@ -154,11 +188,11 @@ public class HighscoresController  {
 		Platform.runLater(()->{
 			try {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("PlayerDetails.fxml"));
-				loader.setController(new PlayerDetailsController( sesh.key.getPlayerName()));
+				loader.setController(new PlayerDetailsController(sesh));
 				Parent root = (Parent) loader.load();
 		        Stage stage = new Stage();
 		        Scene scene = new Scene(root);      
-		        stage.setTitle("Player Details");
+		        stage.setTitle("Player Details: "+ sesh.key.getPlayerName());
 		        stage.setScene(scene);
 		        stage.setResizable(false);
 		        stage.show();
@@ -169,7 +203,12 @@ public class HighscoresController  {
 	        }
 		});
 	}
-	public HighscoresController(String levelName) {
-		this.levelName=levelName;
+
+	public HighscoresController(String levelName, int stepsTaken, int timePassed) {
+		super();
+		this.levelName = levelName;
+		this.stepsTaken = stepsTaken;
+		this.timePassed = timePassed;
 	}
+	
 }

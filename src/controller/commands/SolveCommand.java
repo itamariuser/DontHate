@@ -25,8 +25,7 @@ public class SolveCommand extends Command {
 	@Override
 	public void execute()
 	{
-		this.modelRef.setSolution(SolveCommand.this.requester.request(SolveCommand.this.getModelRef().getLevel(), params.get(0), Integer.parseInt(params.get(1))));
-		this.modelRef.setCurrentSolution(this.modelRef.getSolution());
+		this.modelRef.setSolution(requester.request(SolveCommand.this.getModelRef().getLevel(), params.get(0), Integer.parseInt(params.get(1))));
 		viewRef.solutionReady();
 	}
 }

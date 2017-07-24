@@ -62,4 +62,6 @@ public interface Model {
 	 * @param moveQueue - The list of commands to execute. 
 	 */
 	public void runSolution(Queue<String> moveQueue);
+	
+	public void stop();
 }

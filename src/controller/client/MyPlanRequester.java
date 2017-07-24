@@ -1,12 +1,13 @@
 package controller.client;
 
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import common.Level2D;
 import commons.ServerPlan;
+import controller.server.ServerPlanAdapter;
+import solver.SokobanSolver;
 
 public class MyPlanRequester implements PlanRequester{
 	@Override
@@ -22,28 +23,31 @@ public class MyPlanRequester implements PlanRequester{
 			output = new ObjectOutputStream(theServer.getOutputStream());
 			input = new ObjectInputStream(theServer.getInputStream());
 			output.writeObject(level);
-			output.flush();
-			objFromServer = (ServerPlan) input.readObject();
-			System.out.println(objFromServer);		
+
+//			objFromServer = (ServerPlan) input.readObject();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+//		
+//		finally {
+//			if(output != null)
+//				try {
+//					output.close();
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}		
+//			if (input != null) {
+//				try {
+//					output.close();
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+		SokobanSolver solver = new SokobanSolver();
 		
-		finally {
-			if(output != null)
-				try {
-					output.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}		
-			if (input != null) {
-				try {
-					output.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return objFromServer;
+		ServerPlan s=ServerPlanAdapter.convert(solver.solveLevel(level), level.getName());
+		return s;
 	}
 }

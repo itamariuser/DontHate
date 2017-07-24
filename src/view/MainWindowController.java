@@ -139,7 +139,7 @@ public class MainWindowController extends View implements Observer{
 							secondPassed.stop();
 							FXMLLoader loader = new FXMLLoader(getClass().getResource("WinMenu.fxml"));
 							
-				        	loader.setController(new WinMenuController(this.timePassed,this.steps, level.getName(),level.getDifficulty()));
+				        	loader.setController(new WinMenuController(this.timePassed,level.getNumOfSteps(), level.getName(),level.getDifficulty()));
 				        	BorderPane root1 = (BorderPane)loader.load();
 				            Stage stage = new Stage();
 				            stage.setTitle("Congratulations!");
