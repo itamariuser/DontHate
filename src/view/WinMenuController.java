@@ -51,21 +51,21 @@ public class WinMenuController implements Observer {
 	}
 
 	public void registerHighscore() {
-		//RESTORE
-//		List<LevelEntity> levels = dbm.getLevelsWithName(levelName);
-//		if (levels.isEmpty()) {
-//			dbm.add(new LevelEntity(levelName, levelDifficulty));
-//		}
-//		List<PlayerEntity> players = dbm.getPlayersWithName(playerName.getText());
-//		if (players.isEmpty()) {
-//			dbm.add(new PlayerEntity(playerName.getText(), 1));
-//		} else {
-//			PlayerEntity player = new PlayerEntity(players.get(0).getPlayerName(), players.get(0).getWinCount() + 1);
-//			dbm.updatePlayerWinCount(player, player.getWinCount() + 1);
-//		}
-//
-//		dbm.add(new GameSession(timePassed, stepsTaken, new Date(), levelName, playerName.getText()));
-//END
+		//
+		List<LevelEntity> levels = dbm.getLevelsWithName(levelName);
+		if (levels.isEmpty()) {
+			dbm.add(new LevelEntity(levelName, levelDifficulty));
+		}
+		List<PlayerEntity> players = dbm.getPlayersWithName(playerName.getText());
+		if (players.isEmpty()) {
+			dbm.add(new PlayerEntity(playerName.getText(), 1));
+		} else {
+			PlayerEntity player = new PlayerEntity(players.get(0).getPlayerName(), players.get(0).getWinCount() + 1);
+			dbm.updatePlayerWinCount(player, player.getWinCount() + 1);
+		}
+
+		dbm.add(new GameSession(timePassed, stepsTaken, new Date(), levelName, playerName.getText()));
+		//
 		showHighscores();
 	}
 
@@ -124,7 +124,6 @@ public class WinMenuController implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// receive port, ip from requestWindowController
 	}
 
 }

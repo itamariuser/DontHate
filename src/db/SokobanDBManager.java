@@ -27,13 +27,13 @@ public class SokobanDBManager {
 		return instance;
 	}
 	private SokobanDBManager() {
-//		try {
-//			Configuration configuration = new Configuration();
-//			configuration.configure();
-//			factory = configuration.buildSessionFactory();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		try {
+			Configuration configuration = new Configuration();
+			configuration.configure();
+			factory = configuration.buildSessionFactory();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

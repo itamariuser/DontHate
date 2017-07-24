@@ -49,46 +49,6 @@ public class HighscoresController  {
 	
 	@SuppressWarnings({ "unchecked", "unused" })
 	public void init() {
-		//STUB FOR GAME SESSIONS FROM SQL
-		Date dat1=new Date();
-		dat1.setYear(2017);
-		dat1.setMonth(6);
-		dat1.setDate(15);
-		dat1.setHours(14);
-		dat1.setMinutes(56);
-		dat1.setSeconds(33);
-		sesh1=new GameSession(new GameSessionKey(levelName, "Itamar"),50, 30,dat1);
-//		sesh1.setLevelName(levelName);
-//		sesh1.setPlayerName("AYLMAO");
-		
-		Date dat2=new Date();
-		dat2.setYear(2017);
-		dat2.setMonth(6);
-		dat2.setDate(19);
-		dat2.setHours(16);
-		dat2.setMinutes(4);
-		dat2.setSeconds(15);
-		
-		sesh2=new GameSession(new GameSessionKey(levelName, "Matan"),60, 30,dat2);
-//		sesh1.setLevelName(levelName);
-//		sesh1.setPlayerName("MOSHE");
-		
-		Date dat3=new Date();
-		dat3.setYear(2017);
-		dat3.setMonth(7);
-		dat3.setDate(21);
-		dat3.setHours(22);
-		dat3.setMinutes(23);
-		dat3.setSeconds(43);
-		sesh3=new GameSession(new GameSessionKey(levelName, "Moshe"),40, 45,dat3);
-		
-		
-		sesh4=new GameSession(new GameSessionKey(levelName, "Itamar"),timePassed, stepsTaken,new Date());
-		
-//		sesh1.setLevelName(levelName);
-//		sesh1.setPlayerName("DODA");
-		//END OF STUB
-		
 		
 		//Configure columns
 		TableColumn<GameSession,String> nameCol=new TableColumn<>("Name");
@@ -137,9 +97,8 @@ public class HighscoresController  {
 		
 		//Add data
 		
-		//RESTORE
-//		SokobanDBManager dbm=SokobanDBManager.getInstance();
-//		ArrayList<GameSession> arr=dbm.getGameSessionsWithLevelName(levelName);
+		SokobanDBManager dbm=SokobanDBManager.getInstance();
+		ArrayList<GameSession> arr=dbm.getGameSessionsWithLevelName(levelName);
 		
 		//Detect click
 		tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
@@ -152,11 +111,9 @@ public class HighscoresController  {
 		//********************* FILTER BY SEARCH FIELD****************
 		ObservableList<GameSession> l=FXCollections.observableArrayList();
 		
-		//DELETE
-		l.addAll(sesh1,sesh2,sesh3,sesh4);
 		
-		//RESTORE
-//		l.addAll(arr);
+		//
+		l.addAll(arr);
 		tableView.setItems(l);
 		FilteredList<GameSession> data=new FilteredList<>(l);
 		
